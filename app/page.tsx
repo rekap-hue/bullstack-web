@@ -259,14 +259,14 @@ const ServiceModule = ({ title, description, icon: Icon, stats, type = 'default'
                   <Icon size={24} className="relative z-10" />
                 </div>
                 <div className="relative select-none" style={{ transform: g.active ? `translate(${g.shakeX}px,${g.shakeY}px)` : 'none', transition: g.active ? 'none' : 'transform 0.15s ease' }}>
-                  <h2 className={`text-5xl font-black italic tracking-tighter uppercase transition-colors duration-300 ${isHovered ? 'text-orange-500' : 'text-orange-900'}`}>
+                  <h2 className={`text-4xl md:text-5xl font-black italic tracking-tighter uppercase transition-colors duration-300 ${isHovered ? 'text-orange-500' : 'text-orange-900'}`}>
                     <span>{parts[0]}</span>
-                    {parts[1] && <><span className={`mx-2 text-3xl font-light relative -top-1.5 inline-block ${isHovered ? 'text-orange-500 animate-pulse' : 'text-orange-900 opacity-20'}`}>&gt;</span><span>{parts[1]}</span></>}
+                    {parts[1] && <><span className={`mx-1 md:mx-2 text-2xl md:text-3xl font-light relative -top-1.5 inline-block ${isHovered ? 'text-orange-500 animate-pulse' : 'text-orange-900 opacity-20'}`}>&gt;</span><span>{parts[1]}</span></>}
                   </h2>
-                  {g.active && <h2 className="absolute inset-0 text-5xl font-black italic tracking-tighter uppercase text-cyan-400 mix-blend-screen pointer-events-none" style={{ transform: `translate(${g.cShift[0]}px,${g.cShift[1]}px)`, opacity: 0.3 }} aria-hidden>{displayText}</h2>}
-                  {g.active && <h2 className="absolute inset-0 text-5xl font-black italic tracking-tighter uppercase text-red-500 mix-blend-screen pointer-events-none" style={{ transform: `translate(${g.rShift[0]}px,${g.rShift[1]}px)`, opacity: 0.25 }} aria-hidden>{displayText}</h2>}
+                  {g.active && <h2 className="absolute inset-0 text-4xl md:text-5xl font-black italic tracking-tighter uppercase text-cyan-400 mix-blend-screen pointer-events-none" style={{ transform: `translate(${g.cShift[0]}px,${g.cShift[1]}px)`, opacity: 0.3 }} aria-hidden>{displayText}</h2>}
+                  {g.active && <h2 className="absolute inset-0 text-4xl md:text-5xl font-black italic tracking-tighter uppercase text-red-500 mix-blend-screen pointer-events-none" style={{ transform: `translate(${g.rShift[0]}px,${g.rShift[1]}px)`, opacity: 0.25 }} aria-hidden>{displayText}</h2>}
                   {g.active && g.slices.map((sl, i) => (
-                    <h2 key={i} className="absolute inset-0 text-5xl font-black italic tracking-tighter uppercase text-orange-300 pointer-events-none" style={{ clipPath: `inset(${sl.top}% 0 ${Math.max(0, 100 - sl.top - sl.height)}% 0)`, transform: `translateX(${sl.shiftX}px)`, opacity: 0.7 }} aria-hidden>{displayText}</h2>
+                    <h2 key={i} className="absolute inset-0 text-4xl md:text-5xl font-black italic tracking-tighter uppercase text-orange-300 pointer-events-none" style={{ clipPath: `inset(${sl.top}% 0 ${Math.max(0, 100 - sl.top - sl.height)}% 0)`, transform: `translateX(${sl.shiftX}px)`, opacity: 0.7 }} aria-hidden>{displayText}</h2>
                   ))}
                 </div>
               </div>
