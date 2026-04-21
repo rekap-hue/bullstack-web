@@ -198,7 +198,20 @@ type ServiceModuleProps = { title: string; description: string; icon: React.Elem
 const ServiceModule = ({ title, description, icon: Icon, stats, type = 'default', onOpen }: ServiceModuleProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [flipping, setFlipping] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
   const g = useGlitch(isHovered && !flipping);
+
+  // Scroll-based activation for touch devices (no mouse)
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { setIsHovered(entry.isIntersecting); },
+      { threshold: 0.55 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   const handleClick = () => {
     if (flipping) return;
@@ -218,6 +231,7 @@ const ServiceModule = ({ title, description, icon: Icon, stats, type = 'default'
 
   return (
     <div
+      ref={cardRef}
       style={{ perspective: '1200px' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
