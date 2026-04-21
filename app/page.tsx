@@ -752,6 +752,7 @@ export default function Home() {
         </div>
       </div>
 
+      <section className="relative z-20 mx-auto w-full max-w-6xl px-4 md:px-6">
         <button
           type="button"
           onClick={handleOpenBrief}
