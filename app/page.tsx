@@ -708,16 +708,30 @@ export default function Home() {
             type="button"
             onClick={handleLaunch}
             disabled={phase !== "idle"}
-            className="group relative border border-orange-900/60 bg-black px-10 py-4 text-[11px] font-extrabold uppercase tracking-[0.45em] text-orange-800/90 hover:border-orange-500/40 hover:text-orange-700 md:px-16 md:py-5 md:text-[12px]"
-            style={{ clipPath: 'polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))' }}
+            className="group relative p-0"
+            style={{ clipPath: 'none', background: 'none', border: 'none' }}
           >
-            <span className="flex items-center gap-3 whitespace-nowrap">
-              SYSTEM ONLINE
+            {/* Border layer — same clip-path + colored bg = visible border including on diagonal */}
+            <span
+              className="block"
+              style={{
+                clipPath: 'polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))',
+                background: 'rgba(124,45,18,0.55)',
+                padding: '1px',
+              }}
+            >
+              {/* Inner fill */}
               <span
-                className="inline-block h-[6px] w-[6px] rounded-full bg-orange-700/80 shrink-0"
-                style={{ animation: 'blink-dot 1.1s step-start infinite' }}
-              />
-              VSTOUPIT DO SYSTÉMU
+                className="flex items-center justify-center gap-3 whitespace-nowrap bg-black px-10 py-4 text-[11px] font-extrabold uppercase tracking-[0.45em] text-orange-800/90 group-hover:text-orange-600 md:px-16 md:py-5 md:text-[12px]"
+                style={{ clipPath: 'polygon(0 0, calc(100% - 13px) 0, 100% 13px, 100% 100%, 13px 100%, 0 calc(100% - 13px))' }}
+              >
+                SYSTEM ONLINE
+                <span
+                  className="inline-block h-[6px] w-[6px] rounded-full bg-orange-700/80 shrink-0"
+                  style={{ animation: 'blink-dot 1.1s step-start infinite' }}
+                />
+                VSTOUPIT DO SYSTÉMU
+              </span>
             </span>
           </button>
         </div>
