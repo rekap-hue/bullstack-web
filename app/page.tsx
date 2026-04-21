@@ -647,7 +647,7 @@ export default function Home() {
 
       <section
         className={`relative z-20 mx-auto flex min-h-screen max-w-6xl flex-col items-center px-4 transition-all duration-700 md:px-6 ${
-          showHud ? "justify-start pb-28 pt-10" : "justify-center pb-16 pt-6"
+          showHud ? "justify-start pb-28 pt-10" : "justify-center pb-8 pt-8"
         }`}
       >
         <div
@@ -746,7 +746,7 @@ export default function Home() {
             >
               {/* Inner fill */}
               <span
-                className="flex items-center justify-center gap-3 whitespace-nowrap bg-black px-10 py-4 text-[11px] font-extrabold uppercase tracking-[0.45em] text-orange-800/90 group-hover:text-orange-600 md:px-16 md:py-5 md:text-[12px]"
+                className="flex items-center justify-center gap-2 whitespace-nowrap bg-black px-6 py-3 text-[9px] font-extrabold uppercase tracking-[0.25em] text-orange-800/90 group-hover:text-orange-600 md:gap-3 md:px-16 md:py-5 md:text-[12px] md:tracking-[0.45em]"
                 style={{ clipPath: 'polygon(0 0, calc(100% - 13px) 0, 100% 13px, 100% 100%, 13px 100%, 0 calc(100% - 13px))' }}
               >
                 SYSTEM ONLINE
