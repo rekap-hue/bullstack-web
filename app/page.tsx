@@ -694,37 +694,30 @@ export default function Home() {
           </div>
         </div>
 
-        {/* CTA wrapper */}
-        <div
-          className={`relative mt-16 w-fit transition-[transform,opacity] duration-[1600ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
-            phase === "idle" ? "opacity-100" : "pointer-events-none translate-y-32 scale-[1.18] opacity-0"
-          }`}
-        >
+        {/* spacer so content doesn't sit behind fixed CTA */}
+        <div className="h-28" />
+      </section>
+
+      {/* CTA — fixed floating bottom center */}
+      <div
+        className={`fixed bottom-10 left-0 right-0 z-40 flex justify-center px-4 transition-[transform,opacity] duration-[1600ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          phase === "idle" ? "opacity-100 translate-y-0" : "pointer-events-none translate-y-32 scale-[1.18] opacity-0"
+        }`}
+      >
+        <div className="relative w-fit">
           {/* Corner brackets */}
           <span className="pointer-events-none absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-orange-500 shadow-[0_0_10px_#f97316] z-30" />
           <span className="pointer-events-none absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-orange-500 shadow-[0_0_10px_#f97316] z-30" />
-          {/*
-            Glow: NO clip-path on any glow layer — clip-path creates compositing layer
-            that blocks opacity animation propagation in Chrome.
-            opacity-only on outer span (no filter/clip) → guaranteed compositor animation.
-            blur on child span (no animation/clip) → blurs rectangular bg, rounds corners naturally.
-            inset-[-10px] lets blur extend outside button bounds.
-          */}
           <span
             className="pointer-events-none absolute block"
-            style={{
-              inset: '-10px',
-              opacity: phase === 'idle' ? undefined : 0,
-            }}
+            style={{ inset: '-10px', opacity: phase === 'idle' ? undefined : 0 }}
           >
             <span
               className="block w-full h-full"
               style={{
                 background: '#ea580c',
                 filter: 'blur(24px)',
-                ...(phase === 'idle'
-                  ? { animation: 'btn-glow-opacity 3.2s ease-in-out infinite' }
-                  : {}),
+                ...(phase === 'idle' ? { animation: 'btn-glow-opacity 3.2s ease-in-out infinite' } : {}),
               }}
             />
           </span>
@@ -735,7 +728,6 @@ export default function Home() {
             className="group relative block p-0"
             style={{ background: 'none', border: 'none' }}
           >
-            {/* Outer border layer: clip-path + orange bg + 1px padding = visible diagonal border */}
             <span
               className="block"
               style={{
@@ -744,7 +736,6 @@ export default function Home() {
                 padding: '1px',
               }}
             >
-              {/* Inner fill */}
               <span
                 className="flex items-center justify-center gap-2 whitespace-nowrap bg-black px-6 py-3 text-[9px] font-extrabold uppercase tracking-[0.25em] text-orange-800/90 group-hover:text-orange-600 md:gap-3 md:px-16 md:py-5 md:text-[12px] md:tracking-[0.45em]"
                 style={{ clipPath: 'polygon(0 0, calc(100% - 13px) 0, 100% 13px, 100% 100%, 13px 100%, 0 calc(100% - 13px))' }}
@@ -759,6 +750,7 @@ export default function Home() {
             </span>
           </button>
         </div>
+      </div>
 
         <button
           type="button"
