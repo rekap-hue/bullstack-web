@@ -871,6 +871,10 @@ export default function Home() {
             <div className="pointer-events-none absolute hidden md:block bottom-4 left-20 right-3 h-[2px] overflow-hidden bg-orange-300/25 md:right-6 md:left-auto md:w-32">
               <span className="absolute inset-y-0 w-16 bg-gradient-to-r from-transparent via-orange-200/90 to-transparent" style={{ animation: 'line-shimmer 3.2s ease-in-out 1.6s infinite' }} />
             </div>
+            {/* Odlesk na spodní hraně — pouze mobil */}
+            <div className="pointer-events-none absolute md:hidden bottom-0 left-0 right-0 h-[2px] overflow-hidden bg-orange-400/20">
+              <span className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-orange-300/80 to-transparent" style={{ animation: 'line-shimmer 4s ease-in-out infinite' }} />
+            </div>
             <span className="pointer-events-none absolute left-7 bottom-3 font-mono text-[7px] font-extrabold uppercase tracking-widest text-orange-700/70 md:text-[7px]">
               sequence a17 • system armed
             </span>
