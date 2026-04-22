@@ -372,19 +372,20 @@ const ServiceDetail = ({ title, description, icon: Icon, stats, onClose }: Servi
             {/* Líc — záhlaví */}
             <div className="absolute inset-0 bg-[#040404]/98 border border-orange-500/35 overflow-hidden" style={{ backfaceVisibility: 'hidden' }}>
               {grid}
-              <div className="relative z-10 h-full flex items-center justify-between px-8 md:px-10 gap-4">
-                <div className="flex items-center gap-5">
-                  <div className="p-3 border border-orange-500/50 text-orange-500 bg-black shadow-[0_0_20px_rgba(249,115,22,0.3)]">
-                    <Icon size={28} />
+              <div className="relative z-10 h-full flex items-center justify-between px-5 md:px-10 gap-3">
+                <div className="flex items-center gap-3 md:gap-5 min-w-0">
+                  <div className="p-2 md:p-3 border border-orange-500/50 text-orange-500 bg-black shadow-[0_0_20px_rgba(249,115,22,0.3)] shrink-0">
+                    <Icon size={22} className="md:hidden" />
+                    <Icon size={28} className="hidden md:block" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-[9px] font-mono font-bold uppercase tracking-widest text-orange-900/60 mb-1">SERVICE_MODULE</p>
-                    <h2 className="text-4xl md:text-6xl font-black italic tracking-tighter uppercase text-orange-500 leading-none">
-                      {parts[0]}{parts[1] && <><span className="mx-2 text-3xl font-light relative -top-1 inline-block">&gt;</span>{parts[1]}</>}
+                    <h2 className="text-3xl md:text-6xl font-black italic tracking-tighter uppercase text-orange-500 leading-none truncate">
+                      {parts[0]}{parts[1] && <><span className="mx-1 md:mx-2 text-2xl md:text-3xl font-light relative top-0 md:-top-1 inline-block">&gt;</span>{parts[1]}</>}
                     </h2>
                   </div>
                 </div>
-                <button onClick={handleClose} className="border border-orange-500/30 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.35em] text-orange-200 hover:border-orange-400/60 hover:bg-orange-500/10 transition-colors shrink-0">
+                <button onClick={handleClose} className="border border-orange-500/30 px-3 md:px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] md:tracking-[0.35em] text-orange-200 hover:border-orange-400/60 hover:bg-orange-500/10 transition-colors shrink-0">
                   ✕ ZAVŘÍT
                 </button>
               </div>
