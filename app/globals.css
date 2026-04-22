@@ -169,6 +169,13 @@ html, body {
   50%       { opacity: 1; }
 }
 
+@keyframes lightning-bolt {
+  0%   { opacity: 0; }
+  10%  { opacity: 1; }
+  60%  { opacity: 0.8; }
+  100% { opacity: 0; }
+}
+
 @keyframes btn-sweep {
   0%      { left: -20%; opacity: 0; }
   10%     { opacity: 1; }

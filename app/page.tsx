@@ -555,6 +555,30 @@ function TechTotem() {
   );
 }
 
+const LightningIntro = () => {
+  const [visible, setVisible] = useState(true);
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(false), 1200);
+    return () => clearTimeout(t);
+  }, []);
+  if (!visible) return null;
+  return (
+    <div className="pointer-events-none fixed inset-0 z-[999] overflow-hidden">
+      {[
+        { d: "M 95% 0% L 72% 28% L 81% 38% L 52% 62% L 61% 68% L 30% 88% L 5% 100%", delay: "0ms",   dur: "320ms" },
+        { d: "M 100% 2% L 78% 22% L 85% 35% L 58% 58% L 65% 70% L 38% 90% L 10% 100%", delay: "80ms",  dur: "280ms" },
+        { d: "M 88% 0% L 68% 32% L 77% 42% L 45% 68% L 55% 75% L 22% 92% L 0% 98%",  delay: "160ms", dur: "300ms" },
+      ].map((bolt, i) => (
+        <svg key={i} className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none"
+          style={{ animation: `lightning-bolt ${bolt.dur} ease-out ${bolt.delay} 1 forwards` }}>
+          <path d={bolt.d} stroke="rgba(249,115,22,0.9)" strokeWidth="0.4" fill="none"
+            style={{ filter: "drop-shadow(0 0 3px #f97316) drop-shadow(0 0 8px rgba(249,115,22,0.6))" }} />
+        </svg>
+      ))}
+    </div>
+  );
+};
+
 export default function Home() {
   const [phase, setPhase] = useState<"idle" | "booting" | "active">("idle");
   const [statusText, setStatusText] = useState(
@@ -607,32 +631,6 @@ export default function Home() {
     }
   };
 
-  // Scroll / swipe down in idle triggers launch
-  useEffect(() => {
-    let touchStartY = 0;
-    const onWheel = (e: WheelEvent) => {
-      if (phase === "idle" && e.deltaY > 0) handleLaunch();
-    };
-    const onTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0]?.clientY ?? 0;
-    };
-    const onTouchMove = (e: TouchEvent) => {
-      if (phase === "idle") {
-        const dy = touchStartY - (e.touches[0]?.clientY ?? 0);
-        if (dy > 18) handleLaunch();
-      }
-    };
-    window.addEventListener("wheel", onWheel, { passive: true });
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
-    return () => {
-      window.removeEventListener("wheel", onWheel);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase]);
-
   const handleOpenBrief = () => {
     setBriefSubmitted(false);
     setBriefOpen(true);
@@ -665,6 +663,7 @@ export default function Home() {
       }}
     >
       <div className="absolute inset-0 bg-black/75" />
+      <LightningIntro />
 
       <header
         className={`absolute inset-x-0 top-0 z-30 transition-all duration-700 ease-out ${
