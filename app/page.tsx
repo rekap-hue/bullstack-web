@@ -259,7 +259,7 @@ const ServiceModule = ({ title, description, icon: Icon, stats, type = 'default'
                   <Icon size={24} className="relative z-10" />
                 </div>
                 <div className="relative select-none" style={{ transform: g.active ? `translate(${g.shakeX}px,${g.shakeY}px)` : 'none', transition: g.active ? 'none' : 'transform 0.15s ease' }}>
-                  <h2 className={`text-4xl md:text-5xl font-black italic tracking-tighter uppercase transition-colors duration-300 ${isHovered ? 'text-orange-500' : 'text-orange-900'}`}>
+                  <h2 className={`text-3xl md:text-5xl font-black italic tracking-tighter uppercase whitespace-nowrap transition-colors duration-300 ${isHovered ? 'text-orange-500' : 'text-orange-900'}`}>
                     <span>{parts[0]}</span>
                     {parts[1] && <><span className={`mx-1 md:mx-2 text-2xl md:text-3xl font-light relative -top-1.5 inline-block ${isHovered ? 'text-orange-500 animate-pulse' : 'text-orange-900 opacity-20'}`}>&gt;</span><span>{parts[1]}</span></>}
                   </h2>
@@ -661,7 +661,7 @@ export default function Home() {
 
       <section
         className={`relative z-20 mx-auto flex max-w-6xl flex-col items-center px-4 transition-all duration-700 md:px-6 ${
-          showHud ? "min-h-screen justify-start pb-28 pt-10" : "h-[100dvh] justify-start pt-[18vh]"
+          showHud ? "justify-start pb-6 pt-10" : "h-[100dvh] justify-start pt-[18vh]"
         }`}
       >
         <div
