@@ -661,7 +661,7 @@ export default function Home() {
 
       <section
         className={`relative z-20 mx-auto flex min-h-screen max-w-6xl flex-col items-center px-4 transition-all duration-700 md:px-6 ${
-          showHud ? "justify-start pb-28 pt-10" : "justify-center pb-8 pt-8"
+          showHud ? "justify-start pb-28 pt-10" : "justify-center pb-4 pt-20"
         }`}
       >
         <div
@@ -700,7 +700,7 @@ export default function Home() {
             </h1>
             <div className="flex items-center justify-center gap-4">
               <div className="h-[1px] w-8 bg-zinc-800" />
-              <p className="text-[10px] font-light uppercase tracking-[0.8em] text-zinc-500 opacity-80 md:text-sm">
+              <p className="text-[9px] font-light uppercase tracking-[0.5em] text-zinc-500 opacity-80 md:text-[10px] md:tracking-[0.8em]">
                 Software Studio
               </p>
               <div className="h-[1px] w-8 bg-zinc-800" />
@@ -709,7 +709,7 @@ export default function Home() {
         </div>
 
         {/* spacer so content doesn't sit behind fixed CTA */}
-        <div className="h-28" />
+        <div className="h-16" />
       </section>
 
       {/* CTA — fixed floating bottom center */}
