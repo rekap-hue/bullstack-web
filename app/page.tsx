@@ -560,15 +560,18 @@ const LightningIntro = () => {
   const [visible, setVisible] = useState(true);
   useEffect(() => {
     const t1 = setTimeout(() => setPhase2(true), 2500);
-    const t2 = setTimeout(() => setVisible(false), 3800);
+    const t2 = setTimeout(() => setVisible(false), 4500);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
   if (!visible) return null;
 
+  const glowSoft   = "drop-shadow(0 0 1.5px #f97316) drop-shadow(0 0 4px rgba(249,115,22,0.55))";
+  const glowStrong = "drop-shadow(0 0 3px #f97316) drop-shadow(0 0 10px rgba(249,115,22,0.8))";
+
   const sideBolts = [
-    { d: "M 95 0 L 72 28 L 81 38 L 52 62 L 61 68 L 30 88 L 5 100", delay: "0ms",   dur: "320ms" },
-    { d: "M 100 2 L 78 22 L 85 35 L 58 58 L 65 70 L 38 90 L 10 100", delay: "80ms",  dur: "280ms" },
-    { d: "M 88 0 L 68 32 L 77 42 L 45 68 L 55 75 L 22 92 L 0 98",  delay: "160ms", dur: "300ms" },
+    { d: "M 95 0 L 72 28 L 81 38 L 52 62 L 61 68 L 30 88 L 5 100", delay: "0ms",   dur: "420ms" },
+    { d: "M 100 2 L 78 22 L 85 35 L 58 58 L 65 70 L 38 90 L 10 100", delay: "80ms",  dur: "380ms" },
+    { d: "M 88 0 L 68 32 L 77 42 L 45 68 L 55 75 L 22 92 L 0 98",  delay: "160ms", dur: "400ms" },
   ];
 
   return (
@@ -577,83 +580,56 @@ const LightningIntro = () => {
         <svg key={i} className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none"
           style={{ animation: `lightning-bolt ${bolt.dur} ease-out ${bolt.delay} 1 forwards` }}>
           <defs>
-            <linearGradient id={`boltGrad${i}`} x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id={`bg${i}`} x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%"   stopColor="rgba(249,115,22,0.9)" />
               <stop offset="66%"  stopColor="rgba(249,115,22,0.9)" />
               <stop offset="100%" stopColor="rgba(249,115,22,0.2)" />
             </linearGradient>
           </defs>
-          <path d={bolt.d} stroke={`url(#boltGrad${i})`} strokeWidth="0.2" strokeLinecap="round" fill="none"
-            style={{ filter: "drop-shadow(0 0 2px #f97316) drop-shadow(0 0 5px rgba(249,115,22,0.5))" }} />
+          <path d={bolt.d} stroke={`url(#bg${i})`} strokeWidth="0.35" strokeLinecap="round" fill="none"
+            style={{ filter: glowSoft }} />
         </svg>
       ))}
       {phase2 && (
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none"
-          style={{ animation: "lightning-bolt 1300ms ease-out 0ms 1 forwards" }}>
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
           <defs>
-            <linearGradient id="centerGrad" x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%"   stopColor="rgba(249,115,22,0)" />
               <stop offset="5%"   stopColor="rgba(249,115,22,1)" />
-              <stop offset="65%"  stopColor="rgba(249,115,22,1)" />
-              <stop offset="100%" stopColor="rgba(249,115,22,0.35)" />
+              <stop offset="85%"  stopColor="rgba(249,115,22,1)" />
+              <stop offset="100%" stopColor="rgba(249,115,22,0.7)" />
             </linearGradient>
           </defs>
-          {/* Hlavní kmen shora dolů k tlačítku */}
-          <path pathLength="100" d="M 50 0 L 44 18 L 53 26 L 47 48 L 55 57 L 50 70"
-            stroke="url(#centerGrad)" strokeWidth="0.55" strokeLinecap="round" fill="none"
-            strokeDasharray="100" strokeDashoffset="100"
-            style={{
-              filter: "drop-shadow(0 0 4px #f97316) drop-shadow(0 0 12px rgba(249,115,22,0.8))",
-              animation: "bolt-draw 390ms ease-out 0ms 1 forwards",
-            }} />
-          {/* Větev — vnější levá */}
-          <path pathLength="100" d="M 50 70 L 40 73 L 28 76 L 15 80 L 5 85"
-            stroke="url(#centerGrad)" strokeWidth="0.38" strokeLinecap="round" fill="none"
-            strokeDasharray="100" strokeDashoffset="100"
-            style={{
-              filter: "drop-shadow(0 0 3px #f97316) drop-shadow(0 0 8px rgba(249,115,22,0.6))",
-              animation: "bolt-draw 310ms ease-out 295ms 1 forwards",
-            }} />
-          {/* Větev — střední levá */}
-          <path pathLength="100" d="M 50 70 L 43 74 L 34 79 L 23 85"
-            stroke="url(#centerGrad)" strokeWidth="0.3" strokeLinecap="round" fill="none"
-            strokeDasharray="100" strokeDashoffset="100"
-            style={{
-              filter: "drop-shadow(0 0 2px #f97316) drop-shadow(0 0 6px rgba(249,115,22,0.5))",
-              animation: "bolt-draw 270ms ease-out 315ms 1 forwards",
-            }} />
-          {/* Větev — vnitřní levá */}
-          <path pathLength="100" d="M 50 70 L 44 76 L 38 83 L 30 89"
-            stroke="url(#centerGrad)" strokeWidth="0.22" strokeLinecap="round" fill="none"
-            strokeDasharray="100" strokeDashoffset="100"
-            style={{
-              filter: "drop-shadow(0 0 2px #f97316)",
-              animation: "bolt-draw 230ms ease-out 335ms 1 forwards",
-            }} />
-          {/* Větev — vnitřní pravá */}
-          <path pathLength="100" d="M 50 70 L 56 76 L 62 83 L 70 89"
-            stroke="url(#centerGrad)" strokeWidth="0.22" strokeLinecap="round" fill="none"
-            strokeDasharray="100" strokeDashoffset="100"
-            style={{
-              filter: "drop-shadow(0 0 2px #f97316)",
-              animation: "bolt-draw 230ms ease-out 335ms 1 forwards",
-            }} />
-          {/* Větev — střední pravá */}
-          <path pathLength="100" d="M 50 70 L 57 74 L 66 79 L 77 85"
-            stroke="url(#centerGrad)" strokeWidth="0.3" strokeLinecap="round" fill="none"
-            strokeDasharray="100" strokeDashoffset="100"
-            style={{
-              filter: "drop-shadow(0 0 2px #f97316) drop-shadow(0 0 6px rgba(249,115,22,0.5))",
-              animation: "bolt-draw 270ms ease-out 315ms 1 forwards",
-            }} />
-          {/* Větev — vnější pravá */}
-          <path pathLength="100" d="M 50 70 L 60 73 L 72 76 L 85 80 L 95 85"
-            stroke="url(#centerGrad)" strokeWidth="0.38" strokeLinecap="round" fill="none"
-            strokeDasharray="100" strokeDashoffset="100"
-            style={{
-              filter: "drop-shadow(0 0 3px #f97316) drop-shadow(0 0 8px rgba(249,115,22,0.6))",
-              animation: "bolt-draw 310ms ease-out 295ms 1 forwards",
-            }} />
+          {/* Kmen shora až k větvišti u vrchní hrany tlačítka (y≈86) */}
+          <path
+            d="M 50 0 L 45 17 L 53 26 L 47 44 L 55 57 L 49 70 L 52 82 L 50 86"
+            stroke="url(#cg)" strokeWidth="0.65" strokeLinecap="round" fill="none"
+            style={{ filter: glowStrong, animation: "lightning-bolt 1500ms ease-out 0ms 1 forwards" }}
+          />
+          {/* Větev 1 — daleko vlevo, klouže po horní hraně tlačítka */}
+          <path
+            d="M 50 86 L 36 87.5 L 17 88.5 L 4 89"
+            stroke="rgba(249,115,22,0.9)" strokeWidth="0.45" strokeLinecap="round" fill="none"
+            style={{ filter: glowSoft, animation: "lightning-bolt 1300ms ease-out 160ms 1 forwards" }}
+          />
+          {/* Větev 2 — blíže vlevo, vychází o kousek výše (y=82), nepravidelná */}
+          <path
+            d="M 49 82 L 40 85 L 28 87 L 15 88"
+            stroke="rgba(249,115,22,0.65)" strokeWidth="0.28" strokeLinecap="round" fill="none"
+            style={{ filter: glowSoft, animation: "lightning-bolt 1050ms ease-out 240ms 1 forwards" }}
+          />
+          {/* Větev 3 — blíže vpravo, jiný úhel */}
+          <path
+            d="M 51 82 L 62 85 L 74 87 L 85 88"
+            stroke="rgba(249,115,22,0.65)" strokeWidth="0.28" strokeLinecap="round" fill="none"
+            style={{ filter: glowSoft, animation: "lightning-bolt 1050ms ease-out 270ms 1 forwards" }}
+          />
+          {/* Větev 4 — daleko vpravo */}
+          <path
+            d="M 50 86 L 64 87.5 L 83 88.5 L 96 89"
+            stroke="rgba(249,115,22,0.9)" strokeWidth="0.45" strokeLinecap="round" fill="none"
+            style={{ filter: glowSoft, animation: "lightning-bolt 1300ms ease-out 190ms 1 forwards" }}
+          />
         </svg>
       )}
     </div>
