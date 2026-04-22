@@ -897,8 +897,14 @@ export default function Home() {
           >
             <span className="pointer-events-none absolute inset-[3px] border border-orange-300/30" />
             <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.16),transparent_65%)]" />
-            <span className="pointer-events-none absolute left-3 right-16 top-4 h-[2px] bg-orange-300/65 md:left-6 md:right-auto md:w-32" />
-            <span className="pointer-events-none absolute bottom-4 left-16 right-3 h-[2px] bg-orange-300/50 md:right-6 md:left-auto md:w-32" />
+            {/* Horní čára se shimerem zleva doprava */}
+            <div className="pointer-events-none absolute left-3 right-16 top-4 h-[2px] overflow-hidden bg-orange-300/30 md:left-6 md:right-auto md:w-32">
+              <span className="absolute inset-y-0 w-16 bg-gradient-to-r from-transparent via-orange-200/90 to-transparent" style={{ animation: 'line-shimmer 3.2s ease-in-out infinite' }} />
+            </div>
+            {/* Spodní čára se shimerem — zpožděná o polovinu cyklu */}
+            <div className="pointer-events-none absolute bottom-4 left-16 right-3 h-[2px] overflow-hidden bg-orange-300/25 md:right-6 md:left-auto md:w-32">
+              <span className="absolute inset-y-0 w-16 bg-gradient-to-r from-transparent via-orange-200/90 to-transparent" style={{ animation: 'line-shimmer 3.2s ease-in-out 1.6s infinite' }} />
+            </div>
 
             <span className="pointer-events-none absolute left-7 bottom-3 font-mono text-[7px] font-extrabold uppercase tracking-widest text-orange-700/70 md:text-[7px]">
               sequence a17 • system armed
