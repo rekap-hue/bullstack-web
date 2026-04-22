@@ -610,14 +610,44 @@ export default function Home() {
     };
   }, []);
 
-  // Lock body scroll in idle so logo never leaves viewport
+  // Always lock body scroll (page is SPA with own scroll logic)
   useEffect(() => {
-    if (phase === "idle") {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = ""; };
+  }, []);
+
+  // Bounce effect: swipe/scroll down nudges logo down (never off top)
+  const [nudge, setNudge] = useState(0);
+  useEffect(() => {
+    if (phase !== "idle") { setNudge(0); return; }
+    let touchStartY = 0;
+    let settling = false;
+    const settle = () => {
+      if (settling) return;
+      settling = true;
+      setNudge(0);
+      setTimeout(() => { settling = false; }, 500);
+    };
+    const onTouchStart = (e: TouchEvent) => { touchStartY = e.touches[0]?.clientY ?? 0; };
+    const onTouchMove = (e: TouchEvent) => {
+      const dy = touchStartY - (e.touches[0]?.clientY ?? 0);
+      if (dy > 0) setNudge(Math.min(dy * 0.25, 22));
+      else setNudge(0);
+    };
+    const onTouchEnd = () => settle();
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY > 0) { setNudge(18); setTimeout(settle, 350); }
+    };
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    window.addEventListener("wheel", onWheel, { passive: true });
+    return () => {
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("wheel", onWheel);
+    };
   }, [phase]);
 
   useEffect(() => {
@@ -673,7 +703,7 @@ export default function Home() {
       }}
     >
       <div className="absolute inset-0 bg-black/75" />
-      <LightningIntro />
+      {phase === "booting" && <LightningIntro />}
 
       <header
         className={`absolute inset-x-0 top-0 z-30 transition-all duration-700 ease-out ${
@@ -696,7 +726,7 @@ export default function Home() {
 
       <section
         className={`relative z-20 mx-auto flex max-w-6xl flex-col items-center px-4 transition-all duration-700 md:px-6 ${
-          showHud ? "justify-start pb-16 pt-[76px]" : "h-[100dvh] justify-start pt-[30vh]"
+          showHud ? "justify-start pb-16 pt-[76px] md:pt-[90px]" : "h-[100dvh] justify-start pt-[30vh]"
         }`}
       >
         <div
@@ -705,6 +735,7 @@ export default function Home() {
               ? "mt-4 translate-y-0 scale-[0.84] opacity-100 md:mt-8"
               : "translate-y-0 scale-100 opacity-100"
           }`}
+          style={phase === "idle" ? { transform: `translateY(${nudge}px)`, transition: nudge === 0 ? "transform 0.45s cubic-bezier(0.22,1,0.36,1)" : "none" } : undefined}
         >
           <div
             className="relative w-fit overflow-visible"
