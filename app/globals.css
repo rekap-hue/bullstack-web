@@ -176,10 +176,16 @@ html, body {
   100% { opacity: 0; }
 }
 
+/* Středový blesk — kreslí se shora dolů */
+@keyframes bolt-draw {
+  from { stroke-dashoffset: 100; }
+  to   { stroke-dashoffset: 0; }
+}
+
 @keyframes line-shimmer {
-  0%   { left: -4rem; opacity: 0; }
-  10%  { opacity: 1; }
-  80%  { opacity: 1; }
+  0%   { left: -5rem; opacity: 0; }
+  8%   { opacity: 1; }
+  85%  { opacity: 1; }
   100% { left: 110%; opacity: 0; }
 }
 
