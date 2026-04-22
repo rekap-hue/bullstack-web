@@ -604,33 +604,45 @@ const LightningIntro = ({ loop = false }: { loop?: boolean }) => {
               <stop offset="100%" stopColor="rgba(249,115,22,0.7)" />
             </linearGradient>
           </defs>
-          {/* Kmen shora k horní hraně tlačítka y≈89 */}
+          {/* Vnější corona — tlustá + rozmazaná = velká nepravidelná záře */}
           <path
-            d="M 50 0 L 45 17 L 53 26 L 47 44 L 55 57 L 49 70 L 52 82 L 50 89"
-            stroke="url(#cg)" strokeWidth="0.65" strokeLinecap="round" fill="none"
-            style={{ filter: glowStrong, animation: "lightning-bolt 1500ms ease-out 0ms 1 forwards" }}
+            d="M 50 0 L 45 17 L 53 26 L 47 44 L 55 57 L 49 70 L 52 81 L 50 83"
+            stroke="rgba(249,115,22,0.18)" strokeWidth="8" strokeLinecap="round" fill="none"
+            style={{ filter: "blur(3px)", animation: "lightning-bolt 1500ms ease-out 0ms 1 forwards" }}
           />
-          {/* Vnější větev levá — klouže podél horní hrany tlačítka */}
+          {/* Vnitřní záře */}
           <path
-            d="M 50 89 L 34 89.3 L 16 89 L 3 89.4"
+            d="M 50 0 L 45 17 L 53 26 L 47 44 L 55 57 L 49 70 L 52 81 L 50 83"
+            stroke="rgba(249,115,22,0.45)" strokeWidth="2.5" strokeLinecap="round" fill="none"
+            style={{ filter: "blur(1.2px)", animation: "lightning-bolt 1500ms ease-out 0ms 1 forwards" }}
+          />
+          {/* Tenký ostrý kmen */}
+          <path
+            d="M 50 0 L 45 17 L 53 26 L 47 44 L 55 57 L 49 70 L 52 81 L 50 83"
+            stroke="url(#cg)" strokeWidth="0.28" strokeLinecap="round" fill="none"
+            style={{ filter: "drop-shadow(0 0 1px #fff) drop-shadow(0 0 3px #f97316)", animation: "lightning-bolt 1500ms ease-out 0ms 1 forwards" }}
+          />
+          {/* Vnější větev levá */}
+          <path
+            d="M 50 83 L 34 83.3 L 16 83 L 3 83.5"
             stroke="rgba(249,115,22,0.9)" strokeWidth="0.45" strokeLinecap="round" fill="none"
             style={{ filter: glowSoft, animation: "lightning-bolt 1300ms ease-out 160ms 1 forwards" }}
           />
-          {/* Vnitřní větev levá — odbočí výše (y=84), nepravidelná */}
+          {/* Vnitřní větev levá — odbočí výše (y=78) */}
           <path
-            d="M 49 84 L 38 86.5 L 26 88.3 L 15 89"
+            d="M 49 78 L 38 80.5 L 26 82.3 L 15 83"
             stroke="rgba(249,115,22,0.65)" strokeWidth="0.28" strokeLinecap="round" fill="none"
             style={{ filter: glowSoft, animation: "lightning-bolt 1050ms ease-out 240ms 1 forwards" }}
           />
           {/* Vnitřní větev pravá */}
           <path
-            d="M 51 84 L 62 86.5 L 74 88.3 L 85 89"
+            d="M 51 78 L 62 80.5 L 74 82.3 L 85 83"
             stroke="rgba(249,115,22,0.65)" strokeWidth="0.28" strokeLinecap="round" fill="none"
             style={{ filter: glowSoft, animation: "lightning-bolt 1050ms ease-out 270ms 1 forwards" }}
           />
           {/* Vnější větev pravá */}
           <path
-            d="M 50 89 L 66 89.3 L 84 89 L 97 89.4"
+            d="M 50 83 L 66 83.3 L 84 83 L 97 83.5"
             stroke="rgba(249,115,22,0.9)" strokeWidth="0.45" strokeLinecap="round" fill="none"
             style={{ filter: glowSoft, animation: "lightning-bolt 1300ms ease-out 190ms 1 forwards" }}
           />
