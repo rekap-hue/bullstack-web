@@ -622,56 +622,84 @@ const LightningIntro = ({ loop = false }: { loop?: boolean }) => {
             stroke="url(#cg)" strokeWidth="0.28" strokeLinecap="round" fill="none"
             style={{ filter: "drop-shadow(0 0 1px #fff) drop-shadow(0 0 3px #f97316)", animation: "lightning-bolt 1500ms ease-out 0ms 1 forwards" }}
           />
-          {/* Vnější větev levá */}
+          {/* Vnější větev levá — končí na levém okraji tlačítka x≈7 */}
           <path
-            d="M 50 83 L 41 82.2 L 30 83.8 L 19 82.5 L 8 83.2 L 3 82.8"
+            d="M 50 83 L 41 82.2 L 30 83.8 L 19 82.4 L 7 83"
             stroke="rgba(249,115,22,0.5)" strokeWidth="2.2" strokeLinecap="round" fill="none"
             style={{ filter: "blur(1.8px)", animation: "lightning-bolt 1300ms ease-out 160ms 1 forwards" }}
           />
           <path
-            d="M 50 83 L 41 82.2 L 30 83.8 L 19 82.5 L 8 83.2 L 3 82.8"
+            d="M 50 83 L 41 82.2 L 30 83.8 L 19 82.4 L 7 83"
             stroke="rgba(255,180,60,1)" strokeWidth="0.2" strokeLinecap="round" fill="none"
             style={{ filter: "drop-shadow(0 0 2px #f97316) drop-shadow(0 0 8px rgba(249,115,22,0.9))", animation: "lightning-bolt 1300ms ease-out 160ms 1 forwards" }}
           />
-          {/* Vnitřní větev levá */}
+          {/* Vnitřní větev levá — končí x≈18 */}
           <path
-            d="M 49 78 L 41 79.6 L 31 78.4 L 21 80.1 L 14 79.3"
+            d="M 49 78 L 40 79.5 L 30 78.3 L 18 79.8"
             stroke="rgba(249,115,22,0.35)" strokeWidth="1.4" strokeLinecap="round" fill="none"
             style={{ filter: "blur(1.2px)", animation: "lightning-bolt 1050ms ease-out 240ms 1 forwards" }}
           />
           <path
-            d="M 49 78 L 41 79.6 L 31 78.4 L 21 80.1 L 14 79.3"
+            d="M 49 78 L 40 79.5 L 30 78.3 L 18 79.8"
             stroke="rgba(255,180,60,0.9)" strokeWidth="0.16" strokeLinecap="round" fill="none"
             style={{ filter: "drop-shadow(0 0 2px #f97316) drop-shadow(0 0 6px rgba(249,115,22,0.8))", animation: "lightning-bolt 1050ms ease-out 240ms 1 forwards" }}
           />
-          {/* Vnitřní větev pravá */}
+          {/* Vnitřní větev pravá — končí x≈82 */}
           <path
-            d="M 51 78 L 59 79.6 L 69 78.4 L 79 80.1 L 86 79.3"
+            d="M 51 78 L 60 79.5 L 70 78.3 L 82 79.8"
             stroke="rgba(249,115,22,0.35)" strokeWidth="1.4" strokeLinecap="round" fill="none"
             style={{ filter: "blur(1.2px)", animation: "lightning-bolt 1050ms ease-out 270ms 1 forwards" }}
           />
           <path
-            d="M 51 78 L 59 79.6 L 69 78.4 L 79 80.1 L 86 79.3"
+            d="M 51 78 L 60 79.5 L 70 78.3 L 82 79.8"
             stroke="rgba(255,180,60,0.9)" strokeWidth="0.16" strokeLinecap="round" fill="none"
             style={{ filter: "drop-shadow(0 0 2px #f97316) drop-shadow(0 0 6px rgba(249,115,22,0.8))", animation: "lightning-bolt 1050ms ease-out 270ms 1 forwards" }}
           />
-          {/* Vnější větev pravá */}
+          {/* Vnější větev pravá — končí na pravém okraji tlačítka x≈93 */}
           <path
-            d="M 50 83 L 59 82.2 L 70 83.8 L 81 82.5 L 92 83.2 L 97 82.8"
+            d="M 50 83 L 59 82.2 L 70 83.8 L 81 82.4 L 93 83"
             stroke="rgba(249,115,22,0.5)" strokeWidth="2.2" strokeLinecap="round" fill="none"
             style={{ filter: "blur(1.8px)", animation: "lightning-bolt 1300ms ease-out 190ms 1 forwards" }}
           />
           <path
-            d="M 50 83 L 59 82.2 L 70 83.8 L 81 82.5 L 92 83.2 L 97 82.8"
+            d="M 50 83 L 59 82.2 L 70 83.8 L 81 82.4 L 93 83"
             stroke="rgba(255,180,60,1)" strokeWidth="0.2" strokeLinecap="round" fill="none"
             style={{ filter: "drop-shadow(0 0 2px #f97316) drop-shadow(0 0 8px rgba(249,115,22,0.9))", animation: "lightning-bolt 1300ms ease-out 190ms 1 forwards" }}
           />
-          {/* Uzel — maximální oranžová záře bez bílého bodu */}
+          {/* Uzel — větvení uprostřed */}
           <circle cx="50" cy="83" r="6" fill="rgba(249,115,22,0.35)"
             style={{ filter: "blur(4px)", animation: "lightning-bolt 1300ms ease-out 155ms 1 forwards" }}
           />
           <circle cx="50" cy="83" r="2.5" fill="rgba(255,200,80,0.6)"
             style={{ filter: "blur(1.5px)", animation: "lightning-bolt 1300ms ease-out 155ms 1 forwards" }}
+          />
+          {/* Záře v dotyku vnější levé větve s tlačítkem */}
+          <circle cx="7" cy="83" r="5" fill="rgba(249,115,22,0.3)"
+            style={{ filter: "blur(3.5px)", animation: "lightning-bolt 1300ms ease-out 260ms 1 forwards" }}
+          />
+          <circle cx="7" cy="83" r="2" fill="rgba(255,200,80,0.55)"
+            style={{ filter: "blur(1.2px)", animation: "lightning-bolt 1300ms ease-out 260ms 1 forwards" }}
+          />
+          {/* Záře v dotyku vnitřní levé větve */}
+          <circle cx="18" cy="79.8" r="3.5" fill="rgba(249,115,22,0.28)"
+            style={{ filter: "blur(2.5px)", animation: "lightning-bolt 1050ms ease-out 340ms 1 forwards" }}
+          />
+          <circle cx="18" cy="79.8" r="1.5" fill="rgba(255,200,80,0.5)"
+            style={{ filter: "blur(1px)", animation: "lightning-bolt 1050ms ease-out 340ms 1 forwards" }}
+          />
+          {/* Záře v dotyku vnitřní pravé větve */}
+          <circle cx="82" cy="79.8" r="3.5" fill="rgba(249,115,22,0.28)"
+            style={{ filter: "blur(2.5px)", animation: "lightning-bolt 1050ms ease-out 370ms 1 forwards" }}
+          />
+          <circle cx="82" cy="79.8" r="1.5" fill="rgba(255,200,80,0.5)"
+            style={{ filter: "blur(1px)", animation: "lightning-bolt 1050ms ease-out 370ms 1 forwards" }}
+          />
+          {/* Záře v dotyku vnější pravé větve s tlačítkem */}
+          <circle cx="93" cy="83" r="5" fill="rgba(249,115,22,0.3)"
+            style={{ filter: "blur(3.5px)", animation: "lightning-bolt 1300ms ease-out 290ms 1 forwards" }}
+          />
+          <circle cx="93" cy="83" r="2" fill="rgba(255,200,80,0.55)"
+            style={{ filter: "blur(1.2px)", animation: "lightning-bolt 1300ms ease-out 290ms 1 forwards" }}
           />
         </svg>
       )}
