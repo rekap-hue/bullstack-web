@@ -255,7 +255,7 @@ const ServiceModule = ({ title, description, icon: Icon, stats, type = 'default'
             <div className="flex-grow p-8 flex flex-col justify-center relative">
               <div className={`absolute inset-0 transition-opacity duration-1000 pointer-events-none ${isHovered ? 'opacity-[0.04]' : 'opacity-0'} bg-[linear-gradient(to_right,#f97316_1px,transparent_1px),linear-gradient(to_bottom,#f97316_1px,transparent_1px)] bg-[size:20px_20px]`} />
               <div className="flex items-center gap-6 mb-2 relative z-10 pl-3">
-                <div className={`relative p-3 border-[1px] transition-all duration-500 bg-black ${isHovered ? 'border-orange-500 text-orange-500 scale-105 shadow-[0_0_15px_rgba(249,115,22,0.4)]' : 'border-orange-900/10 text-orange-900'}`}>
+                <div className={`relative p-3 border-[1px] transition-all duration-500 bg-black ${isHovered ? 'border-orange-500 text-orange-500 scale-105 shadow-[0_0_15px_rgba(249,115,22,0.4),0_0_35px_rgba(249,115,22,0.2),0_0_60px_rgba(249,115,22,0.1)]' : 'border-orange-900/10 text-orange-900'}`}>
                   <Icon size={24} className="relative z-10" />
                 </div>
                 <div className="relative select-none" style={{ transform: g.active ? `translate(${g.shakeX}px,${g.shakeY}px)` : 'none', transition: g.active ? 'none' : 'transform 0.15s ease' }}>
