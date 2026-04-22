@@ -843,7 +843,7 @@ export default function Home() {
         <button
           type="button"
           onClick={handleOpenBrief}
-          className={`group relative -mt-1 w-full max-w-[64rem] overflow-visible px-2 transition-all duration-700 ease-out ${
+          className={`group relative -mt-1 mx-auto block w-full max-w-[64rem] overflow-visible px-2 transition-all duration-700 ease-out ${
             showHud
               ? "translate-y-0 opacity-100 delay-150"
               : "pointer-events-none translate-y-6 opacity-0"
@@ -857,7 +857,7 @@ export default function Home() {
             }}
           />
           <span
-            className="pointer-events-none absolute left-16 top-[-20px] h-6 w-32 translate-x-8 -translate-y-1 border border-orange-500/30 bg-[#130601]/85"
+            className="pointer-events-none absolute left-10 top-[-20px] h-5 w-24 translate-x-6 -translate-y-1 border border-orange-500/30 bg-[#130601]/85 md:left-16 md:h-6 md:w-32 md:translate-x-8"
             style={{
               clipPath: "polygon(0% 100%, 0% 32%, 16% 0%, 100% 0%, 100% 100%)",
             }}
@@ -870,18 +870,18 @@ export default function Home() {
             }}
           />
           <span
-            className="pointer-events-none absolute left-10 top-[-20px] z-10 h-8 w-44 border border-orange-400/55 bg-[#140702]/95 shadow-[0_0_18px_rgba(249,115,22,0.14)]"
+            className="pointer-events-none absolute left-6 top-[-20px] z-10 h-6 w-36 border border-orange-400/55 bg-[#140702]/95 shadow-[0_0_18px_rgba(249,115,22,0.14)] md:left-10 md:h-8 md:w-44"
             style={{
               clipPath: "polygon(0% 100%, 0% 32%, 16% 0%, 100% 0%, 100% 100%)",
             }}
           />
           <span
-            className="pointer-events-none absolute left-[3rem] top-[-12px] z-10 h-5 w-34 border border-orange-300/40"
+            className="pointer-events-none absolute left-[1.8rem] top-[-12px] z-10 h-4 w-28 border border-orange-300/40 md:left-[3rem] md:h-5 md:w-34"
             style={{
               clipPath: "polygon(0% 100%, 0% 38%, 16% 0%, 100% 0%, 100% 100%)",
             }}
           />
-          <span className="pointer-events-none absolute left-[3.8rem] top-[-12px] z-20 text-[8px] font-semibold uppercase tracking-[0.28em] text-orange-300/95 md:text-[9px]">
+          <span className="pointer-events-none absolute left-[2.4rem] top-[-12px] z-20 text-[7px] font-semibold uppercase tracking-[0.28em] text-orange-300/95 md:left-[3.8rem] md:text-[8px]">
             Prototype - 018 dn
           </span>
           <span className="pointer-events-none absolute inset-y-3 left-0 right-0 border border-orange-500/30" />
