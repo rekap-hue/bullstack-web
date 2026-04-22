@@ -872,7 +872,7 @@ export default function Home() {
               <span className="absolute inset-y-0 w-16 bg-gradient-to-r from-transparent via-orange-200/90 to-transparent" style={{ animation: 'line-shimmer 3.2s ease-in-out 1.6s infinite' }} />
             </div>
             {/* Olejový odlesk přes celé tlačítko */}
-            <span className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(234,88,12,0.06) 15%, rgba(251,191,36,0.07) 35%, rgba(249,115,22,0.1) 50%, rgba(251,191,36,0.07) 65%, rgba(234,88,12,0.06) 85%, transparent 100%)', filter: 'blur(8px)' }} />
+            <span className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(234,88,12,0.18) 12%, rgba(251,191,36,0.22) 30%, rgba(249,115,22,0.28) 50%, rgba(251,191,36,0.22) 70%, rgba(234,88,12,0.18) 88%, transparent 100%)', filter: 'blur(6px)', mixBlendMode: 'screen' }} />
 
             <span className="pointer-events-none absolute left-7 bottom-3 font-mono text-[7px] font-extrabold uppercase tracking-widest text-orange-700/70 md:text-[7px]">
               sequence a17 • system armed
