@@ -619,52 +619,41 @@ export default function Home() {
     };
   }, []);
 
-  // Always lock body scroll (page is SPA with own scroll logic)
+  // Lock scroll only in idle; allow scrolling in HUD
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    if (phase === "idle") {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
     return () => { document.body.style.overflow = ""; };
-  }, []);
+  }, [phase]);
 
-  // Scroll/swipe down: logo jede nahoru až k hornímu okraji, pak pružně zpět
+  // Swipe UP on mobile: logo jede nahoru (efekt), po puštění se vrátí
   const [nudge, setNudge] = useState(0);
   useEffect(() => {
     if (phase !== "idle") { setNudge(0); return; }
     let touchStartY = 0;
-    let peakNudge = 0;
-    const settle = () => {
-      peakNudge = 0;
-      setNudge(0);
-    };
-    const onTouchStart = (e: TouchEvent) => { touchStartY = e.touches[0]?.clientY ?? 0; peakNudge = 0; };
+    const settle = () => setNudge(0);
+    const onTouchStart = (e: TouchEvent) => { touchStartY = e.touches[0]?.clientY ?? 0; };
     const onTouchMove = (e: TouchEvent) => {
       const dy = touchStartY - (e.touches[0]?.clientY ?? 0);
       if (dy > 0) {
-        // max nudge = 30vh so logo reaches close to top
-        const max = window.innerHeight * 0.30;
-        const val = Math.min(dy * 0.7, max);
-        peakNudge = Math.max(peakNudge, val);
-        setNudge(val);
+        // swipe up → logo moves up (negative translateY)
+        const max = window.innerHeight * 0.28;
+        setNudge(Math.min(dy * 0.6, max));
       } else {
         setNudge(0);
       }
     };
     const onTouchEnd = () => settle();
-    const onWheel = (e: WheelEvent) => {
-      if (e.deltaY > 0) {
-        const max = window.innerHeight * 0.28;
-        setNudge(max);
-        setTimeout(settle, 500);
-      }
-    };
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
     window.addEventListener("touchend", onTouchEnd, { passive: true });
-    window.addEventListener("wheel", onWheel, { passive: true });
     return () => {
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("touchend", onTouchEnd);
-      window.removeEventListener("wheel", onWheel);
     };
   }, [phase]);
 
@@ -753,7 +742,7 @@ export default function Home() {
               ? "mt-4 translate-y-0 scale-[0.84] opacity-100 md:mt-8"
               : "translate-y-0 scale-100 opacity-100"
           }`}
-          style={phase === "idle" ? { transform: `translateY(${nudge}px)`, transition: nudge === 0 ? "transform 0.45s cubic-bezier(0.22,1,0.36,1)" : "none" } : undefined}
+          style={phase === "idle" ? { transform: `translateY(-${nudge}px)`, transition: nudge === 0 ? "transform 0.45s cubic-bezier(0.22,1,0.36,1)" : "none" } : undefined}
         >
           <div
             className="relative w-fit overflow-visible"
