@@ -782,7 +782,7 @@ export default function Home() {
       }}
     >
       <div className="absolute inset-0 bg-black/75" />
-      {phase === "booting" && <LightningIntro />}
+      {phase !== "idle" && <LightningIntro />}
 
       <header
         className={`absolute inset-x-0 top-0 z-30 transition-all duration-700 ease-out ${
