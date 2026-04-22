@@ -559,22 +559,17 @@ const LightningIntro = () => {
   const [phase2, setPhase2] = useState(false);
   const [visible, setVisible] = useState(true);
   useEffect(() => {
-    // skupina 1: 0ms, skupina 2 (střed): 2500ms, zmizí: 3400ms
     const t1 = setTimeout(() => setPhase2(true), 2500);
-    const t2 = setTimeout(() => setVisible(false), 3400);
+    const t2 = setTimeout(() => setVisible(false), 3800);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
   if (!visible) return null;
 
-  // Boční blesky — tenčí, spodní třetina se rozšiřuje
   const sideBolts = [
     { d: "M 95 0 L 72 28 L 81 38 L 52 62 L 61 68 L 30 88 L 5 100", delay: "0ms",   dur: "320ms" },
     { d: "M 100 2 L 78 22 L 85 35 L 58 58 L 65 70 L 38 90 L 10 100", delay: "80ms",  dur: "280ms" },
     { d: "M 88 0 L 68 32 L 77 42 L 45 68 L 55 75 L 22 92 L 0 98",  delay: "160ms", dur: "300ms" },
   ];
-
-  // Délka pathu středního blesku pro strokeDasharray animaci shora dolů
-  const centerPath = "M 50 0 L 44 22 L 52 28 L 46 50 L 54 56 L 48 78 L 50 100";
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[999] overflow-hidden">
@@ -583,40 +578,29 @@ const LightningIntro = () => {
           style={{ animation: `lightning-bolt ${bolt.dur} ease-out ${bolt.delay} 1 forwards` }}>
           <defs>
             <linearGradient id={`boltGrad${i}`} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stopColor="rgba(249,115,22,0.9)" stopOpacity="1" />
-              <stop offset="66%"  stopColor="rgba(249,115,22,0.9)" stopOpacity="1" />
-              <stop offset="100%" stopColor="rgba(249,115,22,0.5)" stopOpacity="0.4" />
+              <stop offset="0%"   stopColor="rgba(249,115,22,0.9)" />
+              <stop offset="66%"  stopColor="rgba(249,115,22,0.9)" />
+              <stop offset="100%" stopColor="rgba(249,115,22,0.2)" />
             </linearGradient>
           </defs>
-          <path d={bolt.d} stroke={`url(#boltGrad${i})`}
-            strokeWidth="0.2"
-            strokeLinecap="round"
-            fill="none"
+          <path d={bolt.d} stroke={`url(#boltGrad${i})`} strokeWidth="0.2" strokeLinecap="round" fill="none"
             style={{ filter: "drop-shadow(0 0 2px #f97316) drop-shadow(0 0 5px rgba(249,115,22,0.5))" }} />
         </svg>
       ))}
       {phase2 && (
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none"
+          style={{ animation: "lightning-bolt 900ms ease-out 0ms 1 forwards" }}>
           <defs>
             <linearGradient id="centerGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stopColor="rgba(249,115,22,1)" />
+              <stop offset="0%"   stopColor="rgba(249,115,22,0)" />
+              <stop offset="5%"   stopColor="rgba(249,115,22,1)" />
               <stop offset="66%"  stopColor="rgba(249,115,22,1)" />
-              <stop offset="100%" stopColor="rgba(249,115,22,0.4)" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="rgba(249,115,22,0.2)" />
             </linearGradient>
           </defs>
-          {/* Animace shora dolů přes strokeDashoffset */}
-          <path d={centerPath}
-            stroke="url(#centerGrad)"
-            strokeWidth="0.35"
-            strokeLinecap="round"
-            fill="none"
-            pathLength="100"
-            style={{
-              strokeDasharray: 100,
-              strokeDashoffset: 0,
-              filter: "drop-shadow(0 0 4px #f97316) drop-shadow(0 0 10px rgba(249,115,22,0.7))",
-              animation: "bolt-draw 0.45s ease-out forwards, lightning-bolt 0.7s ease-out 0.1s 1 forwards",
-            }} />
+          <path d="M 50 0 L 44 22 L 52 28 L 46 50 L 54 56 L 48 78 L 50 100"
+            stroke="url(#centerGrad)" strokeWidth="0.5" strokeLinecap="round" fill="none"
+            style={{ filter: "drop-shadow(0 0 4px #f97316) drop-shadow(0 0 12px rgba(249,115,22,0.8))" }} />
         </svg>
       )}
     </div>
