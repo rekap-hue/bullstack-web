@@ -622,29 +622,36 @@ const LightningIntro = ({ loop = false }: { loop?: boolean }) => {
             stroke="url(#cg)" strokeWidth="0.28" strokeLinecap="round" fill="none"
             style={{ filter: "drop-shadow(0 0 1px #fff) drop-shadow(0 0 3px #f97316)", animation: "lightning-bolt 1500ms ease-out 0ms 1 forwards" }}
           />
-          {/* Vnější větev levá */}
+          {/* Vnější větev levá — nepravidelná, tenká, jasná */}
           <path
-            d="M 50 83 L 34 83.3 L 16 83 L 3 83.5"
-            stroke="rgba(249,115,22,0.9)" strokeWidth="0.45" strokeLinecap="round" fill="none"
-            style={{ filter: glowSoft, animation: "lightning-bolt 1300ms ease-out 160ms 1 forwards" }}
+            d="M 50 83 L 41 82.2 L 30 83.8 L 19 82.5 L 8 83.2 L 3 82.8"
+            stroke="rgba(249,115,22,0.95)" strokeWidth="0.22" strokeLinecap="round" fill="none"
+            style={{ filter: "drop-shadow(0 0 1px #fff8) drop-shadow(0 0 4px #f97316) drop-shadow(0 0 9px rgba(249,115,22,0.7))", animation: "lightning-bolt 1300ms ease-out 160ms 1 forwards" }}
           />
-          {/* Vnitřní větev levá — odbočí výše (y=78) */}
+          {/* Vnitřní větev levá — odbočí výše, pokřivená */}
           <path
-            d="M 49 78 L 38 80.5 L 26 82.3 L 15 83"
-            stroke="rgba(249,115,22,0.65)" strokeWidth="0.28" strokeLinecap="round" fill="none"
-            style={{ filter: glowSoft, animation: "lightning-bolt 1050ms ease-out 240ms 1 forwards" }}
+            d="M 49 78 L 41 79.6 L 31 78.4 L 21 80.1 L 14 79.3"
+            stroke="rgba(249,115,22,0.75)" strokeWidth="0.16" strokeLinecap="round" fill="none"
+            style={{ filter: "drop-shadow(0 0 2px #f97316) drop-shadow(0 0 7px rgba(249,115,22,0.6))", animation: "lightning-bolt 1050ms ease-out 240ms 1 forwards" }}
           />
-          {/* Vnitřní větev pravá */}
+          {/* Vnitřní větev pravá — pokřivená */}
           <path
-            d="M 51 78 L 62 80.5 L 74 82.3 L 85 83"
-            stroke="rgba(249,115,22,0.65)" strokeWidth="0.28" strokeLinecap="round" fill="none"
-            style={{ filter: glowSoft, animation: "lightning-bolt 1050ms ease-out 270ms 1 forwards" }}
+            d="M 51 78 L 59 79.6 L 69 78.4 L 79 80.1 L 86 79.3"
+            stroke="rgba(249,115,22,0.75)" strokeWidth="0.16" strokeLinecap="round" fill="none"
+            style={{ filter: "drop-shadow(0 0 2px #f97316) drop-shadow(0 0 7px rgba(249,115,22,0.6))", animation: "lightning-bolt 1050ms ease-out 270ms 1 forwards" }}
           />
-          {/* Vnější větev pravá */}
+          {/* Vnější větev pravá — nepravidelná, tenká, jasná */}
           <path
-            d="M 50 83 L 66 83.3 L 84 83 L 97 83.5"
-            stroke="rgba(249,115,22,0.9)" strokeWidth="0.45" strokeLinecap="round" fill="none"
-            style={{ filter: glowSoft, animation: "lightning-bolt 1300ms ease-out 190ms 1 forwards" }}
+            d="M 50 83 L 59 82.2 L 70 83.8 L 81 82.5 L 92 83.2 L 97 82.8"
+            stroke="rgba(249,115,22,0.95)" strokeWidth="0.22" strokeLinecap="round" fill="none"
+            style={{ filter: "drop-shadow(0 0 1px #fff8) drop-shadow(0 0 4px #f97316) drop-shadow(0 0 9px rgba(249,115,22,0.7))", animation: "lightning-bolt 1300ms ease-out 190ms 1 forwards" }}
+          />
+          {/* Uzel — maximální záře ve středu větvení */}
+          <circle cx="50" cy="83" r="0.7" fill="white"
+            style={{ filter: "drop-shadow(0 0 2px #fff) drop-shadow(0 0 6px #f97316) drop-shadow(0 0 14px rgba(249,115,22,0.9))", animation: "lightning-bolt 1300ms ease-out 155ms 1 forwards" }}
+          />
+          <circle cx="50" cy="83" r="3" fill="rgba(249,115,22,0.25)"
+            style={{ filter: "blur(2px)", animation: "lightning-bolt 1300ms ease-out 155ms 1 forwards" }}
           />
         </svg>
       )}
