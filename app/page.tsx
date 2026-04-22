@@ -661,7 +661,7 @@ export default function Home() {
 
       <section
         className={`relative z-20 mx-auto flex max-w-6xl flex-col items-center px-4 transition-all duration-700 md:px-6 ${
-          showHud ? "justify-start pb-6 pt-10" : "h-[100dvh] justify-start pt-[18vh]"
+          showHud ? "justify-start pb-16 pt-10" : "h-[100dvh] justify-start pt-[26vh]"
         }`}
       >
         <div
@@ -835,7 +835,7 @@ export default function Home() {
             </span>
 
             <span className="relative flex items-center justify-center gap-4 md:gap-6">
-              <span className="text-center text-[31px] font-black italic tracking-tighter uppercase leading-none text-orange-500 drop-shadow-[0_0_12px_rgba(249,115,22,0.4)] md:text-[52px]">
+              <span className="text-center text-[24px] font-black italic tracking-tighter uppercase leading-none whitespace-nowrap text-orange-500 drop-shadow-[0_0_12px_rgba(249,115,22,0.4)] md:text-[52px]">
                 VYPUSTIT PROJEKT
               </span>
               <span className="text-2xl font-light text-orange-500 transition-all duration-300 group-hover:translate-x-1 group-hover:animate-pulse md:text-3xl">
