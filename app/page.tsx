@@ -557,9 +557,11 @@ function TechTotem() {
 
 const LightningIntro = () => {
   const [visible, setVisible] = useState(true);
+  const [showCenter, setShowCenter] = useState(false);
   useEffect(() => {
-    const t = setTimeout(() => setVisible(false), 1200);
-    return () => clearTimeout(t);
+    const t1 = setTimeout(() => setShowCenter(true), 1500);
+    const t2 = setTimeout(() => setVisible(false), 2200);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
   if (!visible) return null;
   return (
@@ -575,6 +577,13 @@ const LightningIntro = () => {
             style={{ filter: "drop-shadow(0 0 3px #f97316) drop-shadow(0 0 8px rgba(249,115,22,0.6))" }} />
         </svg>
       ))}
+      {showCenter && (
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none"
+          style={{ animation: "lightning-bolt 400ms ease-out 0ms 1 forwards" }}>
+          <path d="M 50 0 L 44 22 L 52 28 L 46 50 L 54 56 L 48 78 L 50 100" stroke="rgba(249,115,22,1)" strokeWidth="0.6" fill="none"
+            style={{ filter: "drop-shadow(0 0 4px #f97316) drop-shadow(0 0 12px rgba(249,115,22,0.8))" }} />
+        </svg>
+      )}
     </div>
   );
 };
@@ -616,27 +625,36 @@ export default function Home() {
     return () => { document.body.style.overflow = ""; };
   }, []);
 
-  // Bounce effect: swipe/scroll down nudges logo down (never off top)
+  // Scroll/swipe down: logo jede nahoru až k hornímu okraji, pak pružně zpět
   const [nudge, setNudge] = useState(0);
   useEffect(() => {
     if (phase !== "idle") { setNudge(0); return; }
     let touchStartY = 0;
-    let settling = false;
+    let peakNudge = 0;
     const settle = () => {
-      if (settling) return;
-      settling = true;
+      peakNudge = 0;
       setNudge(0);
-      setTimeout(() => { settling = false; }, 500);
     };
-    const onTouchStart = (e: TouchEvent) => { touchStartY = e.touches[0]?.clientY ?? 0; };
+    const onTouchStart = (e: TouchEvent) => { touchStartY = e.touches[0]?.clientY ?? 0; peakNudge = 0; };
     const onTouchMove = (e: TouchEvent) => {
       const dy = touchStartY - (e.touches[0]?.clientY ?? 0);
-      if (dy > 0) setNudge(Math.min(dy * 0.25, 22));
-      else setNudge(0);
+      if (dy > 0) {
+        // max nudge = 30vh so logo reaches close to top
+        const max = window.innerHeight * 0.30;
+        const val = Math.min(dy * 0.7, max);
+        peakNudge = Math.max(peakNudge, val);
+        setNudge(val);
+      } else {
+        setNudge(0);
+      }
     };
     const onTouchEnd = () => settle();
     const onWheel = (e: WheelEvent) => {
-      if (e.deltaY > 0) { setNudge(18); setTimeout(settle, 350); }
+      if (e.deltaY > 0) {
+        const max = window.innerHeight * 0.28;
+        setNudge(max);
+        setTimeout(settle, 500);
+      }
     };
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
@@ -726,7 +744,7 @@ export default function Home() {
 
       <section
         className={`relative z-20 mx-auto flex max-w-6xl flex-col items-center px-4 transition-all duration-700 md:px-6 ${
-          showHud ? "justify-start pb-16 pt-[76px] md:pt-[90px]" : "h-[100dvh] justify-start pt-[30vh]"
+          showHud ? "justify-start pb-16 pt-[76px] md:pt-[100px]" : "h-[100dvh] justify-start pt-[28vh] md:pt-[32vh]"
         }`}
       >
         <div
