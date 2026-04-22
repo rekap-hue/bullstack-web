@@ -565,9 +565,9 @@ const LightningIntro = () => {
   return (
     <div className="pointer-events-none fixed inset-0 z-[999] overflow-hidden">
       {[
-        { d: "M 95% 0% L 72% 28% L 81% 38% L 52% 62% L 61% 68% L 30% 88% L 5% 100%", delay: "0ms",   dur: "320ms" },
-        { d: "M 100% 2% L 78% 22% L 85% 35% L 58% 58% L 65% 70% L 38% 90% L 10% 100%", delay: "80ms",  dur: "280ms" },
-        { d: "M 88% 0% L 68% 32% L 77% 42% L 45% 68% L 55% 75% L 22% 92% L 0% 98%",  delay: "160ms", dur: "300ms" },
+        { d: "M 95 0 L 72 28 L 81 38 L 52 62 L 61 68 L 30 88 L 5 100", delay: "0ms",   dur: "320ms" },
+        { d: "M 100 2 L 78 22 L 85 35 L 58 58 L 65 70 L 38 90 L 10 100", delay: "80ms",  dur: "280ms" },
+        { d: "M 88 0 L 68 32 L 77 42 L 45 68 L 55 75 L 22 92 L 0 98",  delay: "160ms", dur: "300ms" },
       ].map((bolt, i) => (
         <svg key={i} className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none"
           style={{ animation: `lightning-bolt ${bolt.dur} ease-out ${bolt.delay} 1 forwards` }}>
@@ -609,6 +609,16 @@ export default function Home() {
       window.history.scrollRestoration = previousScrollRestoration;
     };
   }, []);
+
+  // Lock body scroll in idle so logo never leaves viewport
+  useEffect(() => {
+    if (phase === "idle") {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [phase]);
 
   useEffect(() => {
     if (phase !== "booting") return;
@@ -686,7 +696,7 @@ export default function Home() {
 
       <section
         className={`relative z-20 mx-auto flex max-w-6xl flex-col items-center px-4 transition-all duration-700 md:px-6 ${
-          showHud ? "justify-start pb-16 pt-10" : "h-[100dvh] justify-start pt-[26vh]"
+          showHud ? "justify-start pb-16 pt-[76px]" : "h-[100dvh] justify-start pt-[30vh]"
         }`}
       >
         <div
