@@ -661,7 +661,7 @@ export default function Home() {
 
       <section
         className={`relative z-20 mx-auto flex max-w-6xl flex-col items-center px-4 transition-all duration-700 md:px-6 ${
-          showHud ? "min-h-screen justify-start pb-28 pt-10" : "h-[100dvh] justify-center pb-4 pt-20"
+          showHud ? "min-h-screen justify-start pb-28 pt-10" : "h-[100dvh] justify-start pt-[18vh]"
         }`}
       >
         <div
