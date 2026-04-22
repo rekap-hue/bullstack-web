@@ -271,7 +271,7 @@ const ServiceModule = ({ title, description, icon: Icon, stats, type = 'default'
                 </div>
               </div>
               <div className={`w-full h-[1px] mb-6 transition-all duration-700 origin-left ${isHovered ? 'bg-gradient-to-r from-transparent via-orange-500/50 to-transparent scale-x-100' : 'bg-orange-900/10 scale-x-50'}`} />
-              <p className={`text-xs font-mono leading-relaxed mb-8 max-w-xl relative z-10 transition-colors duration-500 ${isHovered ? 'text-orange-100/60' : 'text-orange-900/20'}`}>
+              <p className={`text-[10px] md:text-xs font-mono leading-relaxed mb-8 max-w-xl relative z-10 transition-colors duration-500 ${isHovered ? 'text-orange-100/60' : 'text-orange-900/20'}`}>
                 <span className="text-orange-500 mr-2 font-bold opacity-50">{' >> '}</span>{description}
               </p>
               <div className="flex flex-wrap gap-8 relative z-10">
