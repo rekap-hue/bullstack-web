@@ -897,13 +897,13 @@ export default function Home() {
           >
             <span className="pointer-events-none absolute inset-[3px] border border-orange-300/30" />
             <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.16),transparent_65%)]" />
-            <span className="pointer-events-none absolute left-4 right-16 top-4 h-[2px] bg-orange-300/65 md:left-6 md:right-24" />
-            <span className="pointer-events-none absolute bottom-4 left-16 right-4 h-[2px] bg-orange-300/50 md:left-24 md:right-6" />
+            <span className="pointer-events-none absolute left-3 right-16 top-4 h-[2px] bg-orange-300/65 md:left-6 md:right-auto md:w-32" />
+            <span className="pointer-events-none absolute bottom-4 left-16 right-3 h-[2px] bg-orange-300/50 md:right-6 md:left-auto md:w-32" />
 
-            <span className="pointer-events-none absolute left-7 bottom-3 font-mono text-[6px] font-bold uppercase tracking-widest text-orange-900/40 md:text-[7px]">
+            <span className="pointer-events-none absolute left-7 bottom-3 font-mono text-[7px] font-extrabold uppercase tracking-widest text-orange-700/70 md:text-[7px]">
               sequence a17 • system armed
             </span>
-            <span className="pointer-events-none absolute right-7 top-3 font-mono text-[6px] font-bold uppercase tracking-widest text-orange-900/40 md:text-[7px]">
+            <span className="pointer-events-none absolute right-7 top-3 font-mono text-[7px] font-extrabold uppercase tracking-widest text-orange-700/70 md:text-[7px]">
               bullstack launch protocol
             </span>
 
