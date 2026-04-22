@@ -555,14 +555,18 @@ function TechTotem() {
   );
 }
 
-const LightningIntro = () => {
+const LightningIntro = ({ loop = false }: { loop?: boolean }) => {
+  const [cycleKey, setCycleKey] = useState(0);
   const [phase2, setPhase2] = useState(false);
   const [visible, setVisible] = useState(true);
   useEffect(() => {
+    setVisible(true);
+    setPhase2(false);
     const t1 = setTimeout(() => setPhase2(true), 2500);
     const t2 = setTimeout(() => setVisible(false), 4500);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, []);
+    const t3 = loop ? setTimeout(() => setCycleKey(k => k + 1), 5800) : undefined;
+    return () => { clearTimeout(t1); clearTimeout(t2); if (t3) clearTimeout(t3); };
+  }, [cycleKey, loop]);
   if (!visible) return null;
 
   const glowSoft   = "drop-shadow(0 0 1.5px #f97316) drop-shadow(0 0 4px rgba(249,115,22,0.55))";
@@ -600,33 +604,33 @@ const LightningIntro = () => {
               <stop offset="100%" stopColor="rgba(249,115,22,0.7)" />
             </linearGradient>
           </defs>
-          {/* Kmen shora až k větvišti u vrchní hrany tlačítka (y≈86) */}
+          {/* Kmen shora k horní hraně tlačítka y≈89 */}
           <path
-            d="M 50 0 L 45 17 L 53 26 L 47 44 L 55 57 L 49 70 L 52 82 L 50 86"
+            d="M 50 0 L 45 17 L 53 26 L 47 44 L 55 57 L 49 70 L 52 82 L 50 89"
             stroke="url(#cg)" strokeWidth="0.65" strokeLinecap="round" fill="none"
             style={{ filter: glowStrong, animation: "lightning-bolt 1500ms ease-out 0ms 1 forwards" }}
           />
-          {/* Větev 1 — daleko vlevo, klouže po horní hraně tlačítka */}
+          {/* Vnější větev levá — klouže podél horní hrany tlačítka */}
           <path
-            d="M 50 86 L 36 87.5 L 17 88.5 L 4 89"
+            d="M 50 89 L 34 89.3 L 16 89 L 3 89.4"
             stroke="rgba(249,115,22,0.9)" strokeWidth="0.45" strokeLinecap="round" fill="none"
             style={{ filter: glowSoft, animation: "lightning-bolt 1300ms ease-out 160ms 1 forwards" }}
           />
-          {/* Větev 2 — blíže vlevo, vychází o kousek výše (y=82), nepravidelná */}
+          {/* Vnitřní větev levá — odbočí výše (y=84), nepravidelná */}
           <path
-            d="M 49 82 L 40 85 L 28 87 L 15 88"
+            d="M 49 84 L 38 86.5 L 26 88.3 L 15 89"
             stroke="rgba(249,115,22,0.65)" strokeWidth="0.28" strokeLinecap="round" fill="none"
             style={{ filter: glowSoft, animation: "lightning-bolt 1050ms ease-out 240ms 1 forwards" }}
           />
-          {/* Větev 3 — blíže vpravo, jiný úhel */}
+          {/* Vnitřní větev pravá */}
           <path
-            d="M 51 82 L 62 85 L 74 87 L 85 88"
+            d="M 51 84 L 62 86.5 L 74 88.3 L 85 89"
             stroke="rgba(249,115,22,0.65)" strokeWidth="0.28" strokeLinecap="round" fill="none"
             style={{ filter: glowSoft, animation: "lightning-bolt 1050ms ease-out 270ms 1 forwards" }}
           />
-          {/* Větev 4 — daleko vpravo */}
+          {/* Vnější větev pravá */}
           <path
-            d="M 50 86 L 64 87.5 L 83 88.5 L 96 89"
+            d="M 50 89 L 66 89.3 L 84 89 L 97 89.4"
             stroke="rgba(249,115,22,0.9)" strokeWidth="0.45" strokeLinecap="round" fill="none"
             style={{ filter: glowSoft, animation: "lightning-bolt 1300ms ease-out 190ms 1 forwards" }}
           />
@@ -758,7 +762,7 @@ export default function Home() {
       }}
     >
       <div className="absolute inset-0 bg-black/75" />
-      {phase !== "idle" && <LightningIntro />}
+      {phase !== "idle" && <LightningIntro loop={process.env.NODE_ENV === 'development'} />}
 
       <header
         className={`absolute inset-x-0 top-0 z-30 transition-all duration-700 ease-out ${
