@@ -607,6 +607,32 @@ export default function Home() {
     }
   };
 
+  // Scroll / swipe down in idle triggers launch
+  useEffect(() => {
+    let touchStartY = 0;
+    const onWheel = (e: WheelEvent) => {
+      if (phase === "idle" && e.deltaY > 0) handleLaunch();
+    };
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0]?.clientY ?? 0;
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (phase === "idle") {
+        const dy = touchStartY - (e.touches[0]?.clientY ?? 0);
+        if (dy > 18) handleLaunch();
+      }
+    };
+    window.addEventListener("wheel", onWheel, { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    return () => {
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase]);
+
   const handleOpenBrief = () => {
     setBriefSubmitted(false);
     setBriefOpen(true);
