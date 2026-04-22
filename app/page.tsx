@@ -631,22 +631,22 @@ export default function Home() {
 
   // Swipe UP on mobile: logo jede nahoru (efekt), po puštění se vrátí
   const [nudge, setNudge] = useState(0);
+  const phaseRef = useRef(phase);
+  useEffect(() => { phaseRef.current = phase; if (phase !== "idle") setNudge(0); }, [phase]);
   useEffect(() => {
-    if (phase !== "idle") { setNudge(0); return; }
     let touchStartY = 0;
-    const settle = () => setNudge(0);
     const onTouchStart = (e: TouchEvent) => { touchStartY = e.touches[0]?.clientY ?? 0; };
     const onTouchMove = (e: TouchEvent) => {
+      if (phaseRef.current !== "idle") return;
       const dy = touchStartY - (e.touches[0]?.clientY ?? 0);
       if (dy > 0) {
-        // swipe up → logo moves up (negative translateY)
         const max = window.innerHeight * 0.28;
         setNudge(Math.min(dy * 0.6, max));
       } else {
         setNudge(0);
       }
     };
-    const onTouchEnd = () => settle();
+    const onTouchEnd = () => { if (phaseRef.current === "idle") setNudge(0); };
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
     window.addEventListener("touchend", onTouchEnd, { passive: true });
@@ -655,7 +655,7 @@ export default function Home() {
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("touchend", onTouchEnd);
     };
-  }, [phase]);
+  }, []);
 
   useEffect(() => {
     if (phase !== "booting") return;
