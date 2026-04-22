@@ -699,7 +699,7 @@ export default function Home() {
 
       <section
         className={`relative z-20 mx-auto flex max-w-6xl flex-col items-center px-4 transition-all duration-700 md:px-6 ${
-          showHud ? "justify-start pb-16 pt-[76px] md:pt-[100px]" : "h-[100dvh] justify-start pt-[28vh] md:pt-[32vh]"
+          showHud ? "justify-start pb-16 pt-[76px] md:pt-[100px]" : "h-[100dvh] justify-start pt-[28vh] md:pt-[18vh]"
         }`}
       >
         <div
