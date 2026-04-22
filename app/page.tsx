@@ -855,7 +855,7 @@ export default function Home() {
           <span className="pointer-events-none absolute inset-y-0 left-5 right-5 border border-orange-400/45" />
 
           <span
-            className="relative block overflow-hidden border border-orange-400/70 bg-[#0f0602]/95 px-7 py-4.5 text-orange-200 shadow-[0_0_30px_rgba(249,115,22,0.28)] transition-all duration-300 group-hover:scale-[1.005] group-hover:shadow-[0_0_42px_rgba(249,115,22,0.4)] md:px-12 md:py-5.5"
+            className="relative block overflow-hidden border border-orange-400/70 bg-black px-7 py-4.5 text-orange-200 shadow-[0_0_30px_rgba(249,115,22,0.28)] transition-all duration-300 group-hover:scale-[1.005] group-hover:shadow-[0_0_42px_rgba(249,115,22,0.4)] md:px-12 md:py-5.5"
             style={{
               clipPath:
                 "polygon(4% 0%, 96% 0%, 100% 22%, 100% 68%, 91% 100%, 4% 100%, 0% 78%, 0% 22%)",
@@ -871,9 +871,6 @@ export default function Home() {
             <div className="pointer-events-none absolute bottom-4 left-20 right-3 h-[2px] overflow-hidden bg-orange-300/25 md:right-6 md:left-auto md:w-32">
               <span className="absolute inset-y-0 w-16 bg-gradient-to-r from-transparent via-orange-200/90 to-transparent" style={{ animation: 'line-shimmer 3.2s ease-in-out 1.6s infinite' }} />
             </div>
-            {/* Olejový odlesk přes celé tlačítko */}
-            <span className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(234,88,12,0.18) 12%, rgba(251,191,36,0.22) 30%, rgba(249,115,22,0.28) 50%, rgba(251,191,36,0.22) 70%, rgba(234,88,12,0.18) 88%, transparent 100%)', filter: 'blur(6px)', mixBlendMode: 'screen' }} />
-
             <span className="pointer-events-none absolute left-7 bottom-3 font-mono text-[7px] font-extrabold uppercase tracking-widest text-orange-700/70 md:text-[7px]">
               sequence a17 • system armed
             </span>
