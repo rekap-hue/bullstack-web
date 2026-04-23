@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef, type FormEvent } from "react";
+import { useEffect, useState, useRef, useMemo, type FormEvent } from "react";
 import { Layout, Cpu, Fingerprint } from "lucide-react";
 
 const HyperCore = ({ active }: { active: boolean }) => (
@@ -651,6 +651,26 @@ export default function Home() {
 
   const showHud = phase !== "idle";
 
+  // Automatický kvartál + obsazenost slotů
+  const { currentQuarter, totalSlots, occupiedTotal, slotsByService } = useMemo(() => {
+    const now = new Date();
+    const q = Math.floor(now.getMonth() / 3) + 1;
+    const year = now.getFullYear();
+    const configs: Record<number, { occupied: number; web: number; ai: number; branding: number }> = {
+      1: { occupied: 3, web: 1, ai: 1, branding: 1 },
+      2: { occupied: 5, web: 2, ai: 1, branding: 2 },
+      3: { occupied: 6, web: 2, ai: 2, branding: 2 },
+      4: { occupied: 7, web: 3, ai: 1, branding: 3 },
+    };
+    const cfg = configs[q] ?? configs[2];
+    return {
+      currentQuarter: `Q${q} ${year}`,
+      totalSlots: 7,
+      occupiedTotal: cfg.occupied,
+      slotsByService: { web: cfg.web, ai: cfg.ai, branding: cfg.branding },
+    };
+  }, []);
+
   const handleLaunch = () => {
     if (phase === "idle") {
       setPhase("booting");
@@ -705,9 +725,9 @@ export default function Home() {
           {/* Info bubble — na hover slotů */}
           <div className="pointer-events-none absolute bottom-full left-0 mb-2 w-72 border border-orange-500/35 bg-black/98 px-4 py-4 shadow-[0_0_24px_rgba(249,115,22,0.2)] opacity-0 transition-opacity duration-250 group-hover:opacity-100">
             <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-orange-500 mb-2 font-bold">Co jsou sloty?</p>
-            <p className="text-[11px] font-mono text-orange-100/60 leading-relaxed mb-3">Každý slot = jedno aktivní klientské angažmá. Aktuálně máme volné <span className="text-orange-400 font-bold">2 pozice</span> pro nové projekty.</p>            <div className="border-t border-orange-900/30 pt-2.5 flex flex-col gap-1">
+            <p className="text-[11px] font-mono text-orange-100/60 leading-relaxed mb-3">Každý slot = jedno aktivní klientské angažmá. Aktuálně máme volné <span className="text-orange-400 font-bold">{totalSlots - occupiedTotal} pozice</span> pro nové projekty.</p>            <div className="border-t border-orange-900/30 pt-2.5 flex flex-col gap-1">
               <p className="text-[10px] font-mono text-orange-700/70">Odhad dostupnosti: <span className="text-orange-400 font-semibold">≈ 2–3 týdny</span></p>
-              <p className="text-[10px] font-mono text-orange-700/70">Kvartál: <span className="text-orange-400 font-semibold">Q2 2026</span></p>
+              <p className="text-[10px] font-mono text-orange-700/70">Kvartál: <span className="text-orange-400 font-semibold">{currentQuarter}</span></p>
             </div>
           </div>
           {/* Widget */}
@@ -717,16 +737,14 @@ export default function Home() {
             className="block text-left w-full border border-orange-700/50 bg-black/90 transition-all duration-300 hover:border-orange-500/70 hover:shadow-[0_0_16px_rgba(249,115,22,0.2)]"
           >
             <div className="px-3 pt-2.5 pb-0">
-              <div className="text-[7px] font-mono uppercase tracking-[0.2em] text-orange-600/80 mb-1.5">Kapacita // Q2 2026</div>
+              <div className="text-[7px] font-mono uppercase tracking-[0.2em] text-orange-600/80 mb-1.5">Kapacita // {currentQuarter}</div>
               <div className="flex items-center gap-1.5 mb-1.5">
-                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0s' }} />
-                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0.25s' }} />
-                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0.5s' }} />
-                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0.75s' }} />
-                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '1s' }} />
-                <span className="inline-block w-2.5 h-2.5 border border-orange-600/60" />
-                <span className="inline-block w-2.5 h-2.5 border border-orange-600/60" />
-                <span className="text-[9px] font-mono font-bold text-orange-500 ml-1.5">5 / 7</span>
+                {Array.from({ length: totalSlots }).map((_, i) => (
+                  i < occupiedTotal
+                    ? <span key={i} className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: `${i * 0.2}s` }} />
+                    : <span key={i} className="inline-block w-2.5 h-2.5 border border-orange-600/60" />
+                ))}
+                <span className="text-[9px] font-mono font-bold text-orange-500 ml-1.5">{occupiedTotal} / {totalSlots}</span>
               </div>
               <div className="flex items-center gap-1.5 mb-2">
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
@@ -964,9 +982,9 @@ export default function Home() {
               : "pointer-events-none translate-y-12 opacity-0"
           }`}
         >
-          <ServiceModule title="Web_Vývoj" icon={Layout} description="Konstrukce kvantově responzivních architektur s nulovou latencí a maximální propustností dat." stats={[{ label: "Odezva", value: "0.02ms" }, { label: "Jádro", value: "V8_TURBO" }, { label: "Stav", value: "AKTIVNÍ" }, { label: "Verze", value: "STABLE_V14" }]} occupiedSlots={2} totalSlots={7} onOpen={() => setOpenService({ title: "Web_Vývoj", icon: Layout, description: "Konstrukce kvantově responzivních architektur s nulovou latencí a maximální propustností dat.", stats: [{ label: "Odezva", value: "0.02ms" }, { label: "Jádro", value: "V8_TURBO" }, { label: "Stav", value: "AKTIVNÍ" }, { label: "Verze", value: "STABLE_V14" }] })} />
-          <ServiceModule type="ai" title="AI_Agenti" icon={Cpu} description="Nasazení kognitivních entit s hlubokým učením pro autonomní správu kritických procesů." stats={[{ label: "Synapse", value: "512B+" }, { label: "Model", value: "AXION_4" }, { label: "Sync", value: "STABILNÍ" }, { label: "Verze", value: "STABLE_V14" }]} occupiedSlots={1} totalSlots={7} onOpen={() => setOpenService({ title: "AI_Agenti", type: "ai", icon: Cpu, description: "Nasazení kognitivních entit s hlubokým učením pro autonomní správu kritických procesů.", stats: [{ label: "Synapse", value: "512B+" }, { label: "Model", value: "AXION_4" }, { label: "Sync", value: "STABILNÍ" }, { label: "Verze", value: "STABLE_V14" }] })} />
-          <ServiceModule type="branding" title="Branding" icon={Fingerprint} description="Zhmotnění identity z chaosu myšlenek do hmatatelného odkazu skrze DNA kód vaší značky." stats={[{ label: "Archetyp", value: "DEFINOVÁN" }, { label: "Kód", value: "HELIX_SYNC" }, { label: "Rezonance", value: "98.4%" }, { label: "Fáze", value: "GENESIS" }]} occupiedSlots={2} totalSlots={7} onOpen={() => setOpenService({ title: "Branding", type: "branding", icon: Fingerprint, description: "Zhmotnění identity z chaosu myšlenek do hmatatelného odkazu skrze DNA kód vaší značky.", stats: [{ label: "Archetyp", value: "DEFINOVÁN" }, { label: "Kód", value: "HELIX_SYNC" }, { label: "Rezonance", value: "98.4%" }, { label: "Fáze", value: "GENESIS" }] })} />
+          <ServiceModule title="Web_Vývoj" icon={Layout} description="Konstrukce kvantově responzivních architektur s nulovou latencí a maximální propustností dat." stats={[{ label: "Odezva", value: "0.02ms" }, { label: "Jádro", value: "V8_TURBO" }, { label: "Stav", value: "AKTIVNÍ" }, { label: "Verze", value: "STABLE_V14" }]} occupiedSlots={slotsByService.web} totalSlots={totalSlots} onOpen={() => setOpenService({ title: "Web_Vývoj", icon: Layout, description: "Konstrukce kvantově responzivních architektur s nulovou latencí a maximální propustností dat.", stats: [{ label: "Odezva", value: "0.02ms" }, { label: "Jádro", value: "V8_TURBO" }, { label: "Stav", value: "AKTIVNÍ" }, { label: "Verze", value: "STABLE_V14" }] })} />
+          <ServiceModule type="ai" title="AI_Agenti" icon={Cpu} description="Nasazení kognitivních entit s hlubokým učením pro autonomní správu kritických procesů." stats={[{ label: "Synapse", value: "512B+" }, { label: "Model", value: "AXION_4" }, { label: "Sync", value: "STABILNÍ" }, { label: "Verze", value: "STABLE_V14" }]} occupiedSlots={slotsByService.ai} totalSlots={totalSlots} onOpen={() => setOpenService({ title: "AI_Agenti", type: "ai", icon: Cpu, description: "Nasazení kognitivních entit s hlubokým učením pro autonomní správu kritických procesů.", stats: [{ label: "Synapse", value: "512B+" }, { label: "Model", value: "AXION_4" }, { label: "Sync", value: "STABILNÍ" }, { label: "Verze", value: "STABLE_V14" }] })} />
+          <ServiceModule type="branding" title="Branding" icon={Fingerprint} description="Zhmotnění identity z chaosu myšlenek do hmatatelného odkazu skrze DNA kód vaší značky." stats={[{ label: "Archetyp", value: "DEFINOVÁN" }, { label: "Kód", value: "HELIX_SYNC" }, { label: "Rezonance", value: "98.4%" }, { label: "Fáze", value: "GENESIS" }]} occupiedSlots={slotsByService.branding} totalSlots={totalSlots} onOpen={() => setOpenService({ title: "Branding", type: "branding", icon: Fingerprint, description: "Zhmotnění identity z chaosu myšlenek do hmatatelného odkazu skrze DNA kód vaší značky.", stats: [{ label: "Archetyp", value: "DEFINOVÁN" }, { label: "Kód", value: "HELIX_SYNC" }, { label: "Rezonance", value: "98.4%" }, { label: "Fáze", value: "GENESIS" }] })} />
         </div>
       </section>
 
