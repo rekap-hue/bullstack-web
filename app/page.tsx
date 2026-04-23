@@ -679,6 +679,34 @@ export default function Home() {
     >
       <div className="absolute inset-0 bg-black/75" />
 
+      {/* Grain / noise overlay */}
+      <svg className="fixed inset-0 z-[9990] pointer-events-none w-full h-full" aria-hidden="true" style={{ opacity: 0.035 }}>
+        <filter id="grain-noise">
+          <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="3" stitchTiles="stitch"/>
+          <feColorMatrix type="saturate" values="0"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#grain-noise)"/>
+      </svg>
+
+      {/* Availability / slot HUD widget */}
+      <div className={`fixed bottom-10 left-4 md:left-8 z-40 transition-all duration-700 delay-500 ${showHud ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
+        <div className="border border-orange-900/30 bg-black/90 px-3 py-2.5">
+          <div className="text-[7px] font-mono uppercase tracking-[0.2em] text-orange-900/50 mb-1.5">Kapacita // Q2 2026</div>
+          <div className="flex items-center gap-1.5 mb-1.5">
+            <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316]" />
+            <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316]" />
+            <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316]" />
+            <span className="inline-block w-2.5 h-2.5 border border-orange-900/30" />
+            <span className="inline-block w-2.5 h-2.5 border border-orange-900/30" />
+            <span className="text-[9px] font-mono font-bold text-orange-500 ml-1.5">3 / 5</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
+            <span className="text-[7px] font-mono uppercase tracking-[0.15em] text-orange-700/70">Volné sloty</span>
+          </div>
+        </div>
+      </div>
+
       <header
         className={`absolute inset-x-0 top-0 z-30 transition-all duration-700 ease-out ${
           showHud ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
