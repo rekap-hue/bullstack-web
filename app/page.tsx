@@ -709,9 +709,9 @@ export default function Home() {
             <div className="px-3 pt-2.5 pb-0">
               <div className="text-[7px] font-mono uppercase tracking-[0.2em] text-orange-900/50 mb-1.5">Kapacita // Q2 2026</div>
               <div className="flex items-center gap-1.5 mb-1.5">
-                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316]" />
-                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316]" />
-                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316]" />
+                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0s' }} />
+                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0.35s' }} />
+                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0.7s' }} />
                 <span className="inline-block w-2.5 h-2.5 border border-orange-900/30" />
                 <span className="inline-block w-2.5 h-2.5 border border-orange-900/30" />
                 <span className="text-[9px] font-mono font-bold text-orange-500 ml-1.5">3 / 5</span>
