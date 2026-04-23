@@ -281,6 +281,16 @@ const ServiceModule = ({ title, description, icon: Icon, stats, type = 'default'
                     <div className={`text-[10px] font-bold font-mono transition-all ${isHovered ? 'text-orange-400' : 'text-orange-900/30'}`}>{stat.value}</div>
                   </div>
                 ))}
+                {/* Slot indikátor */}
+                <div className="border-l-[1px] border-orange-900/20 pl-4">
+                  <div className="text-[8px] text-orange-900 uppercase tracking-widest mb-1 font-bold">Sloty</div>
+                  <div className="flex items-center gap-1 mt-0.5">
+                    <span className={`inline-block w-2 h-2 transition-all duration-500 ${isHovered ? 'bg-orange-500 shadow-[0_0_5px_#f97316] animate-pulse' : 'bg-orange-900/30'}`} style={{ animationDuration: '2s', animationDelay: '0s' }} />
+                    <span className={`inline-block w-2 h-2 transition-all duration-500 ${isHovered ? 'bg-orange-500 shadow-[0_0_5px_#f97316] animate-pulse' : 'bg-orange-900/30'}`} style={{ animationDuration: '2s', animationDelay: '0.35s' }} />
+                    <span className={`inline-block w-2 h-2 transition-all duration-500 border ${isHovered ? 'border-orange-500/50 bg-transparent' : 'border-orange-900/20 bg-transparent'}`} />
+                    <span className={`inline-block w-2 h-2 transition-all duration-500 border ${isHovered ? 'border-orange-500/50 bg-transparent' : 'border-orange-900/20 bg-transparent'}`} />
+                  </div>
+                </div>
               </div>
             </div>
             <div className={`w-full md:w-16 flex items-stretch border-t-[1px] md:border-t-0 md:border-l-[1px] transition-all duration-500 ${isHovered ? 'border-orange-500/40' : 'border-orange-900/10'}`}>
