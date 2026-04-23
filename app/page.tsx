@@ -714,27 +714,27 @@ export default function Home() {
           <button
             type="button"
             onClick={handleOpenBrief}
-            className="block text-left w-full border border-orange-900/30 bg-black/90 transition-all duration-300 hover:border-orange-500/50 hover:shadow-[0_0_16px_rgba(249,115,22,0.15)]"
+            className="block text-left w-full border border-orange-700/50 bg-black/90 transition-all duration-300 hover:border-orange-500/70 hover:shadow-[0_0_16px_rgba(249,115,22,0.2)]"
           >
             <div className="px-3 pt-2.5 pb-0">
-              <div className="text-[7px] font-mono uppercase tracking-[0.2em] text-orange-900/50 mb-1.5">Kapacita // Q2 2026</div>
+              <div className="text-[7px] font-mono uppercase tracking-[0.2em] text-orange-600/80 mb-1.5">Kapacita // Q2 2026</div>
               <div className="flex items-center gap-1.5 mb-1.5">
                 <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0s' }} />
                 <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0.25s' }} />
                 <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0.5s' }} />
                 <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0.75s' }} />
                 <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '1s' }} />
-                <span className="inline-block w-2.5 h-2.5 border border-orange-900/30" />
-                <span className="inline-block w-2.5 h-2.5 border border-orange-900/30" />
+                <span className="inline-block w-2.5 h-2.5 border border-orange-600/60" />
+                <span className="inline-block w-2.5 h-2.5 border border-orange-600/60" />
                 <span className="text-[9px] font-mono font-bold text-orange-500 ml-1.5">5 / 7</span>
               </div>
               <div className="flex items-center gap-1.5 mb-2">
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
-                <span className="text-[7px] font-mono uppercase tracking-[0.15em] text-orange-700/70">Volné sloty</span>
+                <span className="text-[7px] font-mono uppercase tracking-[0.15em] text-orange-500/90">Volné sloty</span>
               </div>
             </div>
             {/* CTA integrované do widgetu */}
-            <div className="border-t border-orange-900/30 bg-orange-500/5 px-3 py-1.5 flex items-center gap-2">
+            <div className="border-t border-orange-700/40 bg-orange-500/8 px-3 py-1.5 flex items-center gap-2">
               <span className="text-orange-500 text-[9px]">▶</span>
               <span className="text-[8px] font-mono font-bold uppercase tracking-[0.2em] text-orange-400">Rezervuj slot</span>
             </div>
