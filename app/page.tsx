@@ -193,9 +193,9 @@ function useGlitch(enabled: boolean) {
   return g;
 }
 
-type ServiceModuleProps = { title: string; description: string; icon: React.ElementType; stats: { label: string; value: string }[]; type?: string; onOpen?: () => void; };
+type ServiceModuleProps = { title: string; description: string; icon: React.ElementType; stats: { label: string; value: string }[]; type?: string; onOpen?: () => void; occupiedSlots?: number; totalSlots?: number; };
 
-const ServiceModule = ({ title, description, icon: Icon, stats, type = 'default', onOpen }: ServiceModuleProps) => {
+const ServiceModule = ({ title, description, icon: Icon, stats, type = 'default', onOpen, occupiedSlots = 1, totalSlots = 7 }: ServiceModuleProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [flipping, setFlipping] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -285,11 +285,11 @@ const ServiceModule = ({ title, description, icon: Icon, stats, type = 'default'
                 <div className="border-l-[1px] border-orange-900/20 pl-4">
                   <div className="text-[8px] text-orange-900 uppercase tracking-widest mb-1 font-bold">Sloty</div>
                   <div className="flex items-center gap-1 mt-0.5">
-                    <span className={`inline-block w-2 h-2 transition-all duration-500 ${isHovered ? 'bg-orange-500 shadow-[0_0_5px_#f97316] animate-pulse' : 'bg-orange-900/30'}`} style={{ animationDuration: '2s', animationDelay: '0s' }} />
-                    <span className={`inline-block w-2 h-2 transition-all duration-500 border ${isHovered ? 'border-orange-500/50 bg-transparent' : 'border-orange-900/20 bg-transparent'}`} />
-                    <span className={`inline-block w-2 h-2 transition-all duration-500 border ${isHovered ? 'border-orange-500/50 bg-transparent' : 'border-orange-900/20 bg-transparent'}`} />
-                    <span className={`inline-block w-2 h-2 transition-all duration-500 border ${isHovered ? 'border-orange-500/50 bg-transparent' : 'border-orange-900/20 bg-transparent'}`} />
-                    <span className={`inline-block w-2 h-2 transition-all duration-500 border ${isHovered ? 'border-orange-500/50 bg-transparent' : 'border-orange-900/20 bg-transparent'}`} />
+                    {Array.from({ length: totalSlots }).map((_, i) => (
+                      i < occupiedSlots
+                        ? <span key={i} className={`inline-block w-2 h-2 transition-all duration-500 ${isHovered ? 'bg-orange-500 shadow-[0_0_5px_#f97316] animate-pulse' : 'bg-orange-900/30'}`} style={{ animationDuration: '2s', animationDelay: `${i * 0.25}s` }} />
+                        : <span key={i} className={`inline-block w-2 h-2 transition-all duration-500 border ${isHovered ? 'border-orange-500/50 bg-transparent' : 'border-orange-900/20 bg-transparent'}`} />
+                    ))}
                   </div>
                 </div>
               </div>
@@ -705,8 +705,7 @@ export default function Home() {
           {/* Info bubble — na hover slotů */}
           <div className="pointer-events-none absolute bottom-full left-0 mb-2 w-72 border border-orange-500/35 bg-black/98 px-4 py-4 shadow-[0_0_24px_rgba(249,115,22,0.2)] opacity-0 transition-opacity duration-250 group-hover:opacity-100">
             <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-orange-500 mb-2 font-bold">Co jsou sloty?</p>
-            <p className="text-[11px] font-mono text-orange-100/60 leading-relaxed mb-3">Každý slot = jedno aktivní klientské angažmá. Aktuálně máme volné <span className="text-orange-400 font-bold">2 pozice</span> pro nové projekty.</p>
-            <div className="border-t border-orange-900/30 pt-2.5 flex flex-col gap-1">
+            <p className="text-[11px] font-mono text-orange-100/60 leading-relaxed mb-3">Každý slot = jedno aktivní klientské angažmá. Aktuálně máme volné <span className="text-orange-400 font-bold">2 pozice</span> pro nové projekty.</p>            <div className="border-t border-orange-900/30 pt-2.5 flex flex-col gap-1">
               <p className="text-[10px] font-mono text-orange-700/70">Odhad dostupnosti: <span className="text-orange-400 font-semibold">≈ 2–3 týdny</span></p>
               <p className="text-[10px] font-mono text-orange-700/70">Kvartál: <span className="text-orange-400 font-semibold">Q2 2026</span></p>
             </div>
@@ -721,11 +720,13 @@ export default function Home() {
               <div className="text-[7px] font-mono uppercase tracking-[0.2em] text-orange-900/50 mb-1.5">Kapacita // Q2 2026</div>
               <div className="flex items-center gap-1.5 mb-1.5">
                 <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0s' }} />
-                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0.35s' }} />
-                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0.7s' }} />
+                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0.25s' }} />
+                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0.5s' }} />
+                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '0.75s' }} />
+                <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316] animate-pulse" style={{ animationDuration: '2s', animationDelay: '1s' }} />
                 <span className="inline-block w-2.5 h-2.5 border border-orange-900/30" />
                 <span className="inline-block w-2.5 h-2.5 border border-orange-900/30" />
-                <span className="text-[9px] font-mono font-bold text-orange-500 ml-1.5">3 / 5</span>
+                <span className="text-[9px] font-mono font-bold text-orange-500 ml-1.5">5 / 7</span>
               </div>
               <div className="flex items-center gap-1.5 mb-2">
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
@@ -963,9 +964,9 @@ export default function Home() {
               : "pointer-events-none translate-y-12 opacity-0"
           }`}
         >
-          <ServiceModule title="Web_Vývoj" icon={Layout} description="Konstrukce kvantově responzivních architektur s nulovou latencí a maximální propustností dat." stats={[{ label: "Odezva", value: "0.02ms" }, { label: "Jádro", value: "V8_TURBO" }, { label: "Stav", value: "AKTIVNÍ" }, { label: "Verze", value: "STABLE_V14" }]} onOpen={() => setOpenService({ title: "Web_Vývoj", icon: Layout, description: "Konstrukce kvantově responzivních architektur s nulovou latencí a maximální propustností dat.", stats: [{ label: "Odezva", value: "0.02ms" }, { label: "Jádro", value: "V8_TURBO" }, { label: "Stav", value: "AKTIVNÍ" }, { label: "Verze", value: "STABLE_V14" }] })} />
-          <ServiceModule type="ai" title="AI_Agenti" icon={Cpu} description="Nasazení kognitivních entit s hlubokým učením pro autonomní správu kritických procesů." stats={[{ label: "Synapse", value: "512B+" }, { label: "Model", value: "AXION_4" }, { label: "Sync", value: "STABILNÍ" }, { label: "Verze", value: "STABLE_V14" }]} onOpen={() => setOpenService({ title: "AI_Agenti", type: "ai", icon: Cpu, description: "Nasazení kognitivních entit s hlubokým učením pro autonomní správu kritických procesů.", stats: [{ label: "Synapse", value: "512B+" }, { label: "Model", value: "AXION_4" }, { label: "Sync", value: "STABILNÍ" }, { label: "Verze", value: "STABLE_V14" }] })} />
-          <ServiceModule type="branding" title="Branding" icon={Fingerprint} description="Zhmotnění identity z chaosu myšlenek do hmatatelného odkazu skrze DNA kód vaší značky." stats={[{ label: "Archetyp", value: "DEFINOVÁN" }, { label: "Kód", value: "HELIX_SYNC" }, { label: "Rezonance", value: "98.4%" }, { label: "Fáze", value: "GENESIS" }]} onOpen={() => setOpenService({ title: "Branding", type: "branding", icon: Fingerprint, description: "Zhmotnění identity z chaosu myšlenek do hmatatelného odkazu skrze DNA kód vaší značky.", stats: [{ label: "Archetyp", value: "DEFINOVÁN" }, { label: "Kód", value: "HELIX_SYNC" }, { label: "Rezonance", value: "98.4%" }, { label: "Fáze", value: "GENESIS" }] })} />
+          <ServiceModule title="Web_Vývoj" icon={Layout} description="Konstrukce kvantově responzivních architektur s nulovou latencí a maximální propustností dat." stats={[{ label: "Odezva", value: "0.02ms" }, { label: "Jádro", value: "V8_TURBO" }, { label: "Stav", value: "AKTIVNÍ" }, { label: "Verze", value: "STABLE_V14" }]} occupiedSlots={2} totalSlots={7} onOpen={() => setOpenService({ title: "Web_Vývoj", icon: Layout, description: "Konstrukce kvantově responzivních architektur s nulovou latencí a maximální propustností dat.", stats: [{ label: "Odezva", value: "0.02ms" }, { label: "Jádro", value: "V8_TURBO" }, { label: "Stav", value: "AKTIVNÍ" }, { label: "Verze", value: "STABLE_V14" }] })} />
+          <ServiceModule type="ai" title="AI_Agenti" icon={Cpu} description="Nasazení kognitivních entit s hlubokým učením pro autonomní správu kritických procesů." stats={[{ label: "Synapse", value: "512B+" }, { label: "Model", value: "AXION_4" }, { label: "Sync", value: "STABILNÍ" }, { label: "Verze", value: "STABLE_V14" }]} occupiedSlots={1} totalSlots={7} onOpen={() => setOpenService({ title: "AI_Agenti", type: "ai", icon: Cpu, description: "Nasazení kognitivních entit s hlubokým učením pro autonomní správu kritických procesů.", stats: [{ label: "Synapse", value: "512B+" }, { label: "Model", value: "AXION_4" }, { label: "Sync", value: "STABILNÍ" }, { label: "Verze", value: "STABLE_V14" }] })} />
+          <ServiceModule type="branding" title="Branding" icon={Fingerprint} description="Zhmotnění identity z chaosu myšlenek do hmatatelného odkazu skrze DNA kód vaší značky." stats={[{ label: "Archetyp", value: "DEFINOVÁN" }, { label: "Kód", value: "HELIX_SYNC" }, { label: "Rezonance", value: "98.4%" }, { label: "Fáze", value: "GENESIS" }]} occupiedSlots={2} totalSlots={7} onOpen={() => setOpenService({ title: "Branding", type: "branding", icon: Fingerprint, description: "Zhmotnění identity z chaosu myšlenek do hmatatelného odkazu skrze DNA kód vaší značky.", stats: [{ label: "Archetyp", value: "DEFINOVÁN" }, { label: "Kód", value: "HELIX_SYNC" }, { label: "Rezonance", value: "98.4%" }, { label: "Fáze", value: "GENESIS" }] })} />
         </div>
       </section>
 
