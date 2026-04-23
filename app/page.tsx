@@ -287,6 +287,7 @@ const ServiceModule = ({ title, description, icon: Icon, stats, type = 'default'
                   <div className="flex items-center gap-1 mt-0.5">
                     <span className={`inline-block w-2 h-2 transition-all duration-500 ${isHovered ? 'bg-orange-500 shadow-[0_0_5px_#f97316] animate-pulse' : 'bg-orange-900/30'}`} style={{ animationDuration: '2s', animationDelay: '0s' }} />
                     <span className={`inline-block w-2 h-2 transition-all duration-500 ${isHovered ? 'bg-orange-500 shadow-[0_0_5px_#f97316] animate-pulse' : 'bg-orange-900/30'}`} style={{ animationDuration: '2s', animationDelay: '0.35s' }} />
+                    <span className={`inline-block w-2 h-2 transition-all duration-500 ${isHovered ? 'bg-orange-500 shadow-[0_0_5px_#f97316] animate-pulse' : 'bg-orange-900/30'}`} style={{ animationDuration: '2s', animationDelay: '0.7s' }} />
                     <span className={`inline-block w-2 h-2 transition-all duration-500 border ${isHovered ? 'border-orange-500/50 bg-transparent' : 'border-orange-900/20 bg-transparent'}`} />
                     <span className={`inline-block w-2 h-2 transition-all duration-500 border ${isHovered ? 'border-orange-500/50 bg-transparent' : 'border-orange-900/20 bg-transparent'}`} />
                   </div>
