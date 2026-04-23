@@ -690,21 +690,31 @@ export default function Home() {
 
       {/* Availability / slot HUD widget */}
       <div className={`fixed bottom-10 left-4 md:left-8 z-40 transition-all duration-700 delay-500 ${showHud ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
-        <div className="border border-orange-900/30 bg-black/90 px-3 py-2.5">
-          <div className="text-[7px] font-mono uppercase tracking-[0.2em] text-orange-900/50 mb-1.5">Kapacita // Q2 2026</div>
-          <div className="flex items-center gap-1.5 mb-1.5">
-            <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316]" />
-            <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316]" />
-            <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316]" />
-            <span className="inline-block w-2.5 h-2.5 border border-orange-900/30" />
-            <span className="inline-block w-2.5 h-2.5 border border-orange-900/30" />
-            <span className="text-[9px] font-mono font-bold text-orange-500 ml-1.5">3 / 5</span>
+        <button
+          type="button"
+          onClick={handleOpenBrief}
+          className="group relative block text-left"
+        >
+          {/* Tooltip */}
+          <span className="pointer-events-none absolute bottom-full left-0 mb-2 whitespace-nowrap border border-orange-500/40 bg-black/95 px-2.5 py-1.5 text-[8px] font-mono uppercase tracking-[0.2em] text-orange-400 opacity-0 transition-opacity duration-200 group-hover:opacity-100 shadow-[0_0_12px_rgba(249,115,22,0.2)]">
+            ▶ Rezervuj slot
+          </span>
+          <div className="border border-orange-900/30 bg-black/90 px-3 py-2.5 transition-all duration-300 group-hover:border-orange-500/50 group-hover:shadow-[0_0_16px_rgba(249,115,22,0.15)]">
+            <div className="text-[7px] font-mono uppercase tracking-[0.2em] text-orange-900/50 mb-1.5 group-hover:text-orange-700/70 transition-colors duration-300">Kapacita // Q2 2026</div>
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316]" />
+              <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316]" />
+              <span className="inline-block w-2.5 h-2.5 bg-orange-500 shadow-[0_0_6px_#f97316]" />
+              <span className="inline-block w-2.5 h-2.5 border border-orange-900/30 group-hover:border-orange-500/40 transition-colors duration-300" />
+              <span className="inline-block w-2.5 h-2.5 border border-orange-900/30 group-hover:border-orange-500/40 transition-colors duration-300" />
+              <span className="text-[9px] font-mono font-bold text-orange-500 ml-1.5">3 / 5</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
+              <span className="text-[7px] font-mono uppercase tracking-[0.15em] text-orange-700/70">Volné sloty</span>
+            </div>
           </div>
-          <div className="flex items-center gap-1.5">
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
-            <span className="text-[7px] font-mono uppercase tracking-[0.15em] text-orange-700/70">Volné sloty</span>
-          </div>
-        </div>
+        </button>
       </div>
 
       <header
