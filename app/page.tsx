@@ -252,21 +252,21 @@ const ServiceModule = ({ title, description, icon: Icon, stats, type = 'default'
             <div className={`w-full md:w-56 p-6 flex items-center justify-center border-b-[1px] md:border-b-0 md:border-r-[1px] transition-colors duration-500 ${isHovered ? 'border-orange-500/30 bg-orange-500/5' : 'border-orange-900/10'}`}>
               <div className="w-36 h-56 relative flex items-center justify-center overflow-visible">{renderCore()}</div>
             </div>
-            <div className="flex-grow p-8 flex flex-col justify-center relative">
+            <div className="flex-grow p-4 md:p-8 flex flex-col justify-center relative">
               <div className={`absolute inset-0 transition-opacity duration-1000 pointer-events-none ${isHovered ? 'opacity-[0.04]' : 'opacity-0'} bg-[linear-gradient(to_right,#f97316_1px,transparent_1px),linear-gradient(to_bottom,#f97316_1px,transparent_1px)] bg-[size:20px_20px]`} />
-              <div className="flex items-center gap-6 mb-2 relative z-10 pl-3">
+              <div className="flex items-center gap-3 md:gap-6 mb-2 relative z-10 pl-2 md:pl-3">
                 <div className={`relative p-3 border-[1px] transition-all duration-500 bg-black ${isHovered ? 'border-orange-500 text-orange-500 scale-105 shadow-[0_0_15px_rgba(249,115,22,0.4),0_0_35px_rgba(249,115,22,0.2),0_0_60px_rgba(249,115,22,0.1)]' : 'border-orange-900/10 text-orange-900'}`}>
                   <Icon size={24} className="relative z-10" />
                 </div>
                 <div className="relative select-none" style={{ transform: g.active ? `translate(${g.shakeX}px,${g.shakeY}px)` : 'none', transition: g.active ? 'none' : 'transform 0.15s ease' }}>
-                  <h2 className={`text-3xl md:text-5xl font-black italic tracking-tighter uppercase whitespace-nowrap transition-colors duration-300 ${isHovered ? 'text-orange-500' : 'text-orange-900'}`}>
+                  <h2 className={`text-xl md:text-5xl font-black italic tracking-tighter uppercase whitespace-nowrap transition-colors duration-300 ${isHovered ? 'text-orange-500' : 'text-orange-900'}`}>
                     <span>{parts[0]}</span>
                     {parts[1] && <><span className={`mx-1 md:mx-2 text-2xl md:text-3xl font-light relative top-0 md:-top-1.5 inline-block ${isHovered ? 'text-orange-500 animate-pulse' : 'text-orange-900 opacity-20'}`}>&gt;</span><span>{parts[1]}</span></>}
                   </h2>
-                  {g.active && <h2 className="absolute inset-0 text-4xl md:text-5xl font-black italic tracking-tighter uppercase text-cyan-400 mix-blend-screen pointer-events-none" style={{ transform: `translate(${g.cShift[0]}px,${g.cShift[1]}px)`, opacity: 0.3 }} aria-hidden>{displayText}</h2>}
-                  {g.active && <h2 className="absolute inset-0 text-4xl md:text-5xl font-black italic tracking-tighter uppercase text-red-500 mix-blend-screen pointer-events-none" style={{ transform: `translate(${g.rShift[0]}px,${g.rShift[1]}px)`, opacity: 0.25 }} aria-hidden>{displayText}</h2>}
+                  {g.active && <h2 className="absolute inset-0 text-xl md:text-5xl font-black italic tracking-tighter uppercase text-cyan-400 mix-blend-screen pointer-events-none" style={{ transform: `translate(${g.cShift[0]}px,${g.cShift[1]}px)`, opacity: 0.3 }} aria-hidden>{displayText}</h2>}
+                  {g.active && <h2 className="absolute inset-0 text-xl md:text-5xl font-black italic tracking-tighter uppercase text-red-500 mix-blend-screen pointer-events-none" style={{ transform: `translate(${g.rShift[0]}px,${g.rShift[1]}px)`, opacity: 0.25 }} aria-hidden>{displayText}</h2>}
                   {g.active && g.slices.map((sl, i) => (
-                    <h2 key={i} className="absolute inset-0 text-4xl md:text-5xl font-black italic tracking-tighter uppercase text-orange-300 pointer-events-none" style={{ clipPath: `inset(${sl.top}% 0 ${Math.max(0, 100 - sl.top - sl.height)}% 0)`, transform: `translateX(${sl.shiftX}px)`, opacity: 0.7 }} aria-hidden>{displayText}</h2>
+                    <h2 key={i} className="absolute inset-0 text-xl md:text-5xl font-black italic tracking-tighter uppercase text-orange-300 pointer-events-none" style={{ clipPath: `inset(${sl.top}% 0 ${Math.max(0, 100 - sl.top - sl.height)}% 0)`, transform: `translateX(${sl.shiftX}px)`, opacity: 0.7 }} aria-hidden>{displayText}</h2>
                   ))}
                 </div>
               </div>
