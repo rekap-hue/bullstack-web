@@ -314,9 +314,9 @@ const ServiceModule = ({ title, description, icon: Icon, stats, type = 'default'
   );
 };
 
-type ServiceDetailProps = { title: string; description: string; icon: React.ElementType; stats: { label: string; value: string }[]; type?: string; onClose: () => void; };
+type ServiceDetailProps = { title: string; description: string; icon: React.ElementType; stats: { label: string; value: string }[]; type?: string; onClose: () => void; onOpenBrief: () => void; };
 
-const ServiceDetail = ({ title, description, icon: Icon, stats, onClose }: ServiceDetailProps) => {
+const ServiceDetail = ({ title, description, icon: Icon, stats, onClose, onOpenBrief }: ServiceDetailProps) => {
   const [show, setShow] = useState(false);
   const [topOpen, setTopOpen] = useState(false);
   const [bottomOpen, setBottomOpen] = useState(false);
@@ -420,15 +420,21 @@ const ServiceDetail = ({ title, description, icon: Icon, stats, onClose }: Servi
             <div className="absolute inset-0 bg-[#040404]/98 border-x border-b border-orange-500/35 overflow-hidden" style={{ backfaceVisibility: 'hidden' }}>
               {grid}
               <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-orange-500/60 to-transparent" />
-              <div className="relative z-10 h-full flex items-center justify-between px-8 md:px-10 gap-6 flex-wrap">
-                <div className="flex flex-wrap gap-6">
+              <div className="relative z-10 h-full flex items-center justify-between px-5 md:px-10 gap-4 flex-wrap">
+                <div className="flex flex-wrap gap-4">
                   {stats.map((stat, i) => (
-                    <div key={i} className="border border-orange-500/20 bg-black/40 px-4 py-2">
+                    <div key={i} className="border border-orange-500/20 bg-black/40 px-3 md:px-4 py-2">
                       <div className="text-[8px] font-mono uppercase tracking-widest text-orange-900/60 mb-1">{stat.label}</div>
                       <div className="text-sm font-bold font-mono text-orange-400">{stat.value}</div>
                     </div>
                   ))}
                 </div>
+                <button
+                  onClick={() => { handleClose(); setTimeout(() => onOpenBrief(), 300); }}
+                  className="shrink-0 border border-orange-500/60 bg-orange-500/10 px-4 md:px-6 py-2 md:py-3 text-[10px] md:text-xs font-black uppercase tracking-[0.25em] text-orange-400 hover:bg-orange-500/20 hover:border-orange-400 hover:text-orange-300 transition-all duration-200 shadow-[0_0_15px_rgba(249,115,22,0.15)] hover:shadow-[0_0_25px_rgba(249,115,22,0.3)]"
+                >
+                  ▶ CHCI VYTVOŘIT PROJEKT
+                </button>
               </div>
             </div>
             {/* Záda — černý papír */}
@@ -982,14 +988,14 @@ export default function Home() {
               : "pointer-events-none translate-y-12 opacity-0"
           }`}
         >
-          <ServiceModule title="Web_Vývoj" icon={Layout} description="Weby a mobilní aplikace, které fungují tam, kde žijí vaši zákazníci — na telefonu, v prohlížeči, v terénu. Stavíme rozhraní, která propojují digitální svět s každodenní realitou." stats={[{ label: "Odezva", value: "0.02ms" }, { label: "Jádro", value: "V8_TURBO" }, { label: "Stav", value: "AKTIVNÍ" }, { label: "Verze", value: "STABLE_V14" }]} occupiedSlots={slotsByService.web} totalSlots={totalSlots} onOpen={() => setOpenService({ title: "Web_Vývoj", icon: Layout, description: "Weby a mobilní aplikace, které fungují tam, kde žijí vaši zákazníci — na telefonu, v prohlížeči, v terénu. Stavíme rozhraní, která propojují digitální svět s každodenní realitou.", stats: [{ label: "Odezva", value: "0.02ms" }, { label: "Jádro", value: "V8_TURBO" }, { label: "Stav", value: "AKTIVNÍ" }, { label: "Verze", value: "STABLE_V14" }] })} />
-          <ServiceModule type="ai" title="AI_Agenti" icon={Cpu} description="AI agenti, kteří přebírají rutinu a uvolňují lidem čas na to, co opravdu záleží. Automatizace, chytré asistenty a workflow napojené přímo na váš reálný provoz." stats={[{ label: "Synapse", value: "512B+" }, { label: "Model", value: "AXION_4" }, { label: "Sync", value: "STABILNÍ" }, { label: "Verze", value: "STABLE_V14" }]} occupiedSlots={slotsByService.ai} totalSlots={totalSlots} onOpen={() => setOpenService({ title: "AI_Agenti", type: "ai", icon: Cpu, description: "AI agenti, kteří přebírají rutinu a uvolňují lidem čas na to, co opravdu záleží. Automatizace, chytré asistenty a workflow napojené přímo na váš reálný provoz.", stats: [{ label: "Synapse", value: "512B+" }, { label: "Model", value: "AXION_4" }, { label: "Sync", value: "STABILNÍ" }, { label: "Verze", value: "STABLE_V14" }] })} />
-          <ServiceModule type="branding" title="Branding" icon={Fingerprint} description="Značka, která lidé poznají dřív, než dočtou větu. Vytváříme vizuální identitu a messaging, který drží pohromadě — od loga až po způsob, jakým firma mluví se světem." stats={[{ label: "Archetyp", value: "DEFINOVÁN" }, { label: "Kód", value: "HELIX_SYNC" }, { label: "Rezonance", value: "98.4%" }, { label: "Fáze", value: "GENESIS" }]} occupiedSlots={slotsByService.branding} totalSlots={totalSlots} onOpen={() => setOpenService({ title: "Branding", type: "branding", icon: Fingerprint, description: "Značka, která lidé poznají dřív, než dočtou větu. Vytváříme vizuální identitu a messaging, který drží pohromadě — od loga až po způsob, jakým firma mluví se světem.", stats: [{ label: "Archetyp", value: "DEFINOVÁN" }, { label: "Kód", value: "HELIX_SYNC" }, { label: "Rezonance", value: "98.4%" }, { label: "Fáze", value: "GENESIS" }] })} />
+          <ServiceModule title="Web_Vývoj" icon={Layout} description="Weby a mobilní aplikace, které fungují tam, kde žijí vaši zákazníci — na telefonu, v prohlížeči, v terénu. Stavíme rozhraní, která propojují digitální svět s každodenní realitou." stats={[{ label: "Odezva", value: "0.02ms" }, { label: "Jádro", value: "V8_TURBO" }, { label: "Stav", value: "AKTIVNÍ" }, { label: "Verze", value: "STABLE_V14" }]} occupiedSlots={slotsByService.web} totalSlots={totalSlots} onOpen={() => setOpenService({ title: "Web_Vývoj", icon: Layout, description: "Váš projekt potřebuje víc než jen stránku – potřebuje digitální domov. Stavíme vysoce výkonná zázemí, která slouží jako mozek pro vaše mobilní aplikace. Zajišťujeme, aby vaše data byla v bezpečí, vždy dostupná a připravená k dalšímu zpracování. Od jednoduchých webů až po složité řídicí panely pro správu vašich klientů.", stats: [{ label: "Odezva", value: "0.02ms" }, { label: "Jádro", value: "V8_TURBO" }, { label: "Stav", value: "AKTIVNÍ" }, { label: "Verze", value: "STABLE_V14" }] })} />
+          <ServiceModule type="ai" title="AI_Agenti" icon={Cpu} description="AI agenti, kteří přebírají rutinu a uvolňují lidem čas na to, co opravdu záleží. Automatizace, chytré asistenty a workflow napojené přímo na váš reálný provoz." stats={[{ label: "Synapse", value: "512B+" }, { label: "Model", value: "AXION_4" }, { label: "Sync", value: "STABILNÍ" }, { label: "Verze", value: "STABLE_V14" }]} occupiedSlots={slotsByService.ai} totalSlots={totalSlots} onOpen={() => setOpenService({ title: "AI_Agenti", type: "ai", icon: Cpu, description: "Přestaňte jen sbírat data a začněte je využívat. Naši AI agenti dokážou analyzovat biometrické údaje, predikovat trendy a dávat vašim uživatelům rady v reálném čase. Je to jako mít v aplikaci experta, který nikdy nespí a rozumí každému číslu, které vaše zařízení naměří.", stats: [{ label: "Synapse", value: "512B+" }, { label: "Model", value: "AXION_4" }, { label: "Sync", value: "STABILNÍ" }, { label: "Verze", value: "STABLE_V14" }] })} />
+          <ServiceModule type="branding" title="Branding" icon={Fingerprint} description="Značka, která lidé poznají dřív, než dočtou větu. Vytváříme vizuální identitu a messaging, který drží pohromadě — od loga až po způsob, jakým firma mluví se světem." stats={[{ label: "Archetyp", value: "DEFINOVÁN" }, { label: "Kód", value: "HELIX_SYNC" }, { label: "Rezonance", value: "98.4%" }, { label: "Fáze", value: "GENESIS" }]} occupiedSlots={slotsByService.branding} totalSlots={totalSlots} onOpen={() => setOpenService({ title: "Branding", type: "branding", icon: Fingerprint, description: "Technologie bez tváře nikoho nezaujme. Pomůžeme vám definovat vizuální identitu, která bude odrážet vaši inovaci. Navrhujeme rozhraní, která jsou intuitivní a lidé je milují používat. Od loga až po uživatelský zážitek v mobilní aplikaci – tvoříme funkční design pro digitální věk.", stats: [{ label: "Archetyp", value: "DEFINOVÁN" }, { label: "Kód", value: "HELIX_SYNC" }, { label: "Rezonance", value: "98.4%" }, { label: "Fáze", value: "GENESIS" }] })} />
         </div>
       </section>
 
       {openService && (
-        <ServiceDetail title={openService.title} description={openService.description} icon={openService.icon} stats={openService.stats} type={openService.type} onClose={() => setOpenService(null)} />
+        <ServiceDetail title={openService.title} description={openService.description} icon={openService.icon} stats={openService.stats} type={openService.type} onClose={() => setOpenService(null)} onOpenBrief={handleOpenBrief} />
       )}
 
       <div
