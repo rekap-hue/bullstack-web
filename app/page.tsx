@@ -316,7 +316,7 @@ const ServiceModule = ({ title, description, icon: Icon, stats, type = 'default'
 
 type ServiceDetailProps = { title: string; description: string; icon: React.ElementType; stats: { label: string; value: string }[]; type?: string; onClose: () => void; onOpenBrief: () => void; };
 
-const ServiceDetail = ({ title, description, icon: Icon, stats, onClose, onOpenBrief }: ServiceDetailProps) => {
+const ServiceDetail = ({ title, description, icon: Icon, stats, type, onClose, onOpenBrief }: ServiceDetailProps) => {
   const [show, setShow] = useState(false);
   const [topOpen, setTopOpen] = useState(false);
   const [bottomOpen, setBottomOpen] = useState(false);
