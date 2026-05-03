@@ -363,10 +363,13 @@ const ServiceDetail = ({ title, description, icon: Icon, stats, onClose, onOpenB
         <div className="absolute left-0 right-0 border-x border-orange-500/35 bg-[#040404]/98 overflow-hidden"
           style={{ top: '33.33%', height: '33.34%', opacity: show ? 1 : 0, transition: 'opacity 0.28s ease', zIndex: 2 }}>
           {grid}
-          <div className="relative z-10 h-full flex items-center px-8 md:px-10">
-            <p className="text-sm font-mono text-orange-100/50 max-w-3xl leading-relaxed">
+          <div className="relative z-10 h-full flex items-center justify-between px-8 md:px-10 gap-6">
+            <p className="text-sm font-mono text-orange-100/50 max-w-2xl leading-relaxed">
               <span className="text-orange-500 mr-2 font-bold">{'>> '}</span>{description}
             </p>
+            <div className="hidden md:flex shrink-0 items-center justify-center w-44 h-44 opacity-80">
+              {type === 'ai' ? <NeuralCore active={true} /> : type === 'branding' ? <GenesisCore active={true} /> : <HyperCore active={true} />}
+            </div>
           </div>
         </div>
 
