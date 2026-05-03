@@ -453,7 +453,7 @@ const ServiceDetail = ({ title, description, icon: Icon, stats, type, onClose, o
   );
 };
 
-const navItems = ["SLUŽBY", "PROJEKTY", "O_PROTOKOLU", "KONTAKT"];
+const navItems = ["STATUS", "PROJEKTY", "O_PROTOKOLU", "KONTAKT"];
 
 const serviceCards = [
   {
@@ -583,6 +583,7 @@ export default function Home() {
   );
   const [briefOpen, setBriefOpen] = useState(false);
   const [briefSubmitted, setBriefSubmitted] = useState(false);
+  const [statusOpen, setStatusOpen] = useState(false);
   type OpenService = { title: string; description: string; icon: React.ElementType; stats: { label: string; value: string }[]; type?: string } | null;
   const [openService, setOpenService] = useState<OpenService>(null);
   const [activeField, setActiveField] = useState<
@@ -779,6 +780,7 @@ export default function Home() {
             {navItems.map((item) => (
               <button
                 key={item}
+                onClick={item === 'STATUS' ? () => setStatusOpen(true) : undefined}
                 className="border border-orange-500/20 bg-black/40 px-3 py-1 text-orange-200/90 transition-colors hover:border-orange-400/55 hover:text-orange-100"
               >
                 [ {item} ]
@@ -1000,6 +1002,27 @@ export default function Home() {
       {openService && (
         <ServiceDetail title={openService.title} description={openService.description} icon={openService.icon} stats={openService.stats} type={openService.type} onClose={() => setOpenService(null)} onOpenBrief={handleOpenBrief} />
       )}
+
+      {/* STATUS overlay */}
+      <div className={`fixed inset-0 z-[60] transition-all duration-300 ${statusOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}>
+        <div className="absolute inset-0 bg-black/80 backdrop-blur-[3px]" onClick={() => setStatusOpen(false)} />
+        <div className={`absolute inset-3 md:inset-16 border border-orange-500/35 bg-[#040404]/98 shadow-[0_0_60px_rgba(249,115,22,0.12)] transition-all duration-300 ${statusOpen ? 'scale-100' : 'scale-[0.97]'}`}>
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.04)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+          <div className="absolute inset-[10px] border border-orange-500/15 pointer-events-none" />
+          <div className="relative z-10 h-full flex flex-col items-center justify-center px-8 md:px-20 gap-8">
+            <div className="text-center">
+              <p className="text-[9px] font-mono font-bold uppercase tracking-[0.45em] text-orange-500/60 mb-4">BULLSTACK // STATUS_REPORT</p>
+              <p className="text-base md:text-xl font-mono text-orange-100/75 leading-relaxed max-w-3xl">
+                <span className="text-orange-500 font-bold mr-2">{'>>'}</span>
+                Jsme Bullstack. Nejsme jen vývojáři, jsme architekti vašich nápadů. Stavíme mosty mezi hardwarem, mobilními aplikacemi a umělou inteligencí. Vše, co vytvoříme, má jeden společný cíl: Usnadnit vám život skrze technologie, které fungují za vás.
+              </p>
+            </div>
+            <button onClick={() => setStatusOpen(false)} className="border border-orange-500/30 px-6 py-2 text-[10px] font-bold uppercase tracking-[0.35em] text-orange-200 hover:border-orange-400/60 hover:bg-orange-500/10 transition-colors">
+              ✕ ZAVŘÍT
+            </button>
+          </div>
+        </div>
+      </div>
 
       <div
         className={`fixed inset-0 z-50 transition-all duration-300 ${
