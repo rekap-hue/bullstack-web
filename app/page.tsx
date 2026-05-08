@@ -1008,25 +1008,62 @@ export default function Home() {
           <div className="flex-1 h-[1px] bg-orange-900/20" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="flex flex-col gap-6">
 
-          {/* IRON CORE */}
-          <div className="group relative border border-orange-500/20 bg-black/60 p-6 flex flex-col gap-4 hover:border-orange-500/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(249,115,22,0.08)]">
+          {/* IRON CORE — full width */}
+          <div className="group relative border border-orange-500/20 bg-black/60 hover:border-orange-500/50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(249,115,22,0.1)]">
             <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.04)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute -top-1.5 -left-1.5 w-3 h-3 border-t-2 border-l-2 border-orange-500/60 group-hover:border-orange-500 transition-colors duration-300" />
             <div className="absolute -bottom-1.5 -right-1.5 w-3 h-3 border-b-2 border-r-2 border-orange-500/60 group-hover:border-orange-500 transition-colors duration-300" />
-            <div className="relative z-10">
+            <div className="relative z-10 p-6 md:p-8">
+              {/* Header */}
               <div className="flex items-center justify-between mb-3">
                 <p className="text-[8px] font-mono uppercase tracking-[0.35em] text-orange-900/60">PROJECT_ID // 001</p>
                 <span className="text-[7px] font-mono font-bold uppercase tracking-widest text-amber-400 border border-amber-400/40 px-2 py-0.5 animate-pulse">● ACTIVE_BETA</span>
               </div>
-              <h3 className="text-2xl font-black italic tracking-tighter uppercase text-orange-500 mb-1">IRON CORE</h3>
+              <h3 className="text-3xl md:text-4xl font-black italic tracking-tighter uppercase text-orange-500 mb-1">IRON CORE</h3>
               <div className="h-[1px] w-full bg-gradient-to-r from-orange-500/40 to-transparent mb-4" />
-              <p className="text-xs font-mono text-orange-100/50 leading-relaxed mb-5">
+              <p className="text-xs font-mono text-orange-100/50 leading-relaxed mb-6 max-w-2xl">
                 <span className="text-orange-500 mr-1 font-bold">{'>>'}</span>
                 Mobilní aplikace pro biometrickou analýzu v reálném čase. Měří, vyhodnocuje a dává uživatelům srozumitelná doporučení — přímo na jejich zařízení.
               </p>
-              <div className="flex flex-wrap gap-3">
+
+              {/* Galerie — náhledy */}
+              <div className="mb-6">
+                <p className="text-[8px] font-mono uppercase tracking-[0.35em] text-orange-900/50 mb-3">MEDIA // NÁHLEDY</p>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {/* Foto zástupci */}
+                  {[
+                    { label: 'SCREEN_01', icon: '📱' },
+                    { label: 'SCREEN_02', icon: '📱' },
+                    { label: 'SCREEN_03', icon: '📱' },
+                    { label: 'VIDEO_01', icon: '▶' },
+                  ].map((item, i) => (
+                    <div key={i} className="relative aspect-[9/16] border border-orange-500/20 bg-orange-500/5 flex flex-col items-center justify-center gap-2 hover:border-orange-500/40 hover:bg-orange-500/10 transition-all duration-300 cursor-pointer group/media overflow-hidden">
+                      <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.03)_1px,transparent_1px)] bg-[size:12px_12px] pointer-events-none" />
+                      {item.icon === '▶' ? (
+                        <div className="relative z-10 flex flex-col items-center gap-2">
+                          <div className="w-10 h-10 border border-orange-500/50 flex items-center justify-center group-hover/media:border-orange-500 group-hover/media:shadow-[0_0_15px_rgba(249,115,22,0.3)] transition-all duration-300">
+                            <span className="text-orange-500 text-lg ml-0.5">▶</span>
+                          </div>
+                          <span className="text-[7px] font-mono uppercase tracking-widest text-orange-900/60">PROMO VIDEO</span>
+                        </div>
+                      ) : (
+                        <div className="relative z-10 flex flex-col items-center gap-2">
+                          <div className="w-8 h-12 border border-orange-500/30 rounded-sm flex items-center justify-center group-hover/media:border-orange-500/60 transition-all duration-300">
+                            <span className="text-orange-900/40 text-xs">IMG</span>
+                          </div>
+                          <span className="text-[7px] font-mono uppercase tracking-widest text-orange-900/50">{item.label}</span>
+                        </div>
+                      )}
+                      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-orange-500/30 to-transparent" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Stats */}
+              <div className="flex flex-wrap gap-4 mb-6">
                 {[{ l: 'Typ', v: 'BIOMETRIKA' }, { l: 'Platforma', v: 'iOS + Android' }, { l: 'Fáze', v: 'BETA' }].map((s, i) => (
                   <div key={i} className="border-l border-orange-900/30 pl-3">
                     <div className="text-[7px] font-mono uppercase tracking-widest text-orange-900/50 mb-0.5">{s.l}</div>
@@ -1034,10 +1071,37 @@ export default function Home() {
                   </div>
                 ))}
               </div>
+
+              {/* Tlačítka */}
+              <div className="flex flex-col gap-3">
+                {/* Hlavní CTA */}
+                <a
+                  href="#"
+                  className="flex items-center justify-center gap-3 border border-orange-500/70 bg-orange-500/15 px-6 py-4 text-[11px] md:text-xs font-black uppercase tracking-[0.3em] text-orange-400 hover:bg-orange-500/25 hover:border-orange-400 hover:text-orange-300 transition-all duration-200 shadow-[0_0_20px_rgba(249,115,22,0.15)] hover:shadow-[0_0_35px_rgba(249,115,22,0.35)]"
+                >
+                  <span className="text-base">🌐</span>
+                  OTEVŘÍT WEBOVOU VERZI
+                  <span className="text-orange-500 transition-transform duration-200 group-hover:translate-x-1">&gt;</span>
+                </a>
+                {/* Store tlačítka */}
+                <div className="grid grid-cols-2 gap-3">
+                  <button disabled className="flex items-center justify-center gap-2 border border-orange-900/30 bg-black/40 px-4 py-3 text-[9px] font-bold uppercase tracking-[0.2em] text-orange-900/50 cursor-not-allowed relative overflow-hidden">
+                    <span className="text-sm">🍎</span>
+                    <span>APPLE APP STORE</span>
+                    <span className="absolute top-1 right-1.5 text-[6px] font-mono uppercase tracking-widest text-orange-900/40">SOON</span>
+                  </button>
+                  <button disabled className="flex items-center justify-center gap-2 border border-orange-900/30 bg-black/40 px-4 py-3 text-[9px] font-bold uppercase tracking-[0.2em] text-orange-900/50 cursor-not-allowed relative overflow-hidden">
+                    <span className="text-sm">▶</span>
+                    <span>GOOGLE PLAY</span>
+                    <span className="absolute top-1 right-1.5 text-[6px] font-mono uppercase tracking-widest text-orange-900/40">SOON</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* BULLSTACK OS */}
+          {/* Spodní řada: BULLSTACK OS + VOLNÁ KAPACITA */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="group relative border border-orange-500/20 bg-black/60 p-6 flex flex-col gap-4 hover:border-orange-500/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(249,115,22,0.08)]">
             <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.04)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute -top-1.5 -left-1.5 w-3 h-3 border-t-2 border-l-2 border-orange-500/60 group-hover:border-orange-500 transition-colors duration-300" />
@@ -1092,7 +1156,8 @@ export default function Home() {
             </div>
           </div>
 
-        </div>
+          </div>{/* konec spodního gridu */}
+        </div>{/* konec flex-col wrapperu */}
       </section>
 
       {openService && (
