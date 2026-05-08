@@ -1026,7 +1026,7 @@ export default function Home() {
               </div>
               {/* Logo */}
               <div className="flex items-center justify-center mb-3">
-                <img src="/iron-core-logo.png" alt="Iron Core" className="w-20 h-20 object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_0_12px_rgba(236,72,153,0.4)]" />
+                <img src="/iron-core-logo.png" alt="Iron Core" className="w-28 h-28 object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_0_12px_rgba(236,72,153,0.4)]" />
               </div>
               <h3 className="text-2xl font-black italic tracking-tighter uppercase text-orange-500 mb-1">IRON CORE</h3>
               <div className="h-[1px] w-full bg-gradient-to-r from-orange-500/40 to-transparent mb-4" />
