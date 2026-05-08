@@ -1055,6 +1055,10 @@ export default function Home() {
                 <p className="text-[8px] font-mono uppercase tracking-[0.35em] text-orange-900/60">PROJECT_ID // 002</p>
                 <span className="text-[7px] font-mono font-bold uppercase tracking-widest text-emerald-400 border border-emerald-400/40 px-2 py-0.5">● STABLE</span>
               </div>
+              {/* Logo */}
+              <div className="flex items-center justify-center mb-3">
+                <img src="/bull-head-smooth-rich-v7.png" alt="BullStack" className="w-20 h-20 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_0_12px_rgba(249,115,22,0.35)]" style={{ filter: 'contrast(1.07) saturate(1.14)' }} />
+              </div>
               <h3 className="text-2xl font-black italic tracking-tighter uppercase text-orange-500 mb-1">BULLSTACK_OS</h3>
               <div className="h-[1px] w-full bg-gradient-to-r from-orange-500/40 to-transparent mb-4" />
               <p className="text-xs font-mono text-orange-100/50 leading-relaxed mb-5">
