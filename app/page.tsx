@@ -1185,7 +1185,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center justify-center border border-orange-900/20 bg-black/50 px-4 py-5 h-24 opacity-50 cursor-not-allowed relative overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" className="w-full h-full object-contain grayscale" />
+                  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" className="w-full h-full object-contain grayscale scale-[1.35]" />
                   <span className="absolute top-1.5 right-2 text-[6px] font-mono uppercase tracking-widest text-orange-900/50">SOON</span>
                 </div>
               </div>
