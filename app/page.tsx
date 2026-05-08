@@ -340,7 +340,7 @@ const ServiceDetail = ({ title, description, icon: Icon, stats, type, onClose, o
   };
 
   const parts = title.split('_');
-  const grid = <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.04)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />;
+  const grid = <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.13)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.13)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />;
   const blackBack = (rotate: string) => (
     <div style={{ backfaceVisibility: 'hidden', transform: rotate, position: 'absolute', inset: 0, background: '#000', border: '1px solid rgba(124,45,18,0.1)' }} />
   );
