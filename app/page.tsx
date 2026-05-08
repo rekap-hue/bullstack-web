@@ -576,6 +576,139 @@ function TechTotem() {
   );
 }
 
+const BullStackQuestionLogo = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const particlesRef = useRef<{
+    x: number; y: number; vx: number; vy: number; size: number;
+    rotation: number; rotationSpeed: number; opacity: number; flash: number;
+    attractionScale: number; offsetX: number; offsetY: number;
+  }[]>([]);
+  const requestRef = useRef<number>(0);
+
+  const THEME = {
+    ORANGE: '#f97316',
+    WHITE: '#ffffff',
+    PARTICLE_COUNT: 20,
+    REPEL_FORCE: 2.8,
+    CORE_RADIUS: 55,
+    FRICTION: 0.99,
+    DRIFT_STRENGTH: 0.08
+  };
+
+  const initParticles = (width: number, height: number) => {
+    particlesRef.current = Array.from({ length: THEME.PARTICLE_COUNT }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 1,
+      vy: (Math.random() - 0.5) * 1,
+      size: Math.random() * 5 + 9,
+      rotation: Math.random() * Math.PI * 2,
+      rotationSpeed: (Math.random() - 0.5) * 0.02,
+      opacity: Math.random() * 0.4 + 0.15,
+      flash: 0,
+      attractionScale: Math.random() * 0.008 + 0.004,
+      offsetX: (Math.random() - 0.5) * 60,
+      offsetY: (Math.random() - 0.5) * 60
+    }));
+  };
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    canvas.width = 500;
+    canvas.height = 500;
+    initParticles(canvas.width, canvas.height);
+
+    const animate = () => {
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      const { width, height } = canvas;
+      const centerX = width / 2;
+      const centerY = height / 2;
+      ctx.clearRect(0, 0, width, height);
+      const time = Date.now() * 0.0008;
+
+      ctx.save();
+      ctx.translate(centerX, centerY);
+      const sway = Math.sin(time * 0.7) * 0.15;
+      ctx.rotate(sway);
+      ctx.font = 'bold 130px monospace';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.shadowBlur = 25;
+      ctx.shadowColor = THEME.ORANGE;
+      ctx.strokeStyle = THEME.ORANGE;
+      ctx.lineWidth = 2;
+      ctx.globalAlpha = 0.8 + Math.sin(time * 1.2) * 0.2;
+      ctx.strokeText('?', 0, 0);
+      ctx.shadowBlur = 0;
+      ctx.strokeStyle = THEME.WHITE;
+      ctx.lineWidth = 0.4;
+      ctx.globalAlpha = 0.1;
+      ctx.strokeText('?', 0, 0);
+      ctx.restore();
+
+      particlesRef.current.forEach(p => {
+        p.vx += (Math.random() - 0.5) * THEME.DRIFT_STRENGTH;
+        p.vy += (Math.random() - 0.5) * THEME.DRIFT_STRENGTH;
+        p.vx *= THEME.FRICTION;
+        p.vy *= THEME.FRICTION;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rotation += p.rotationSpeed;
+
+        const targetX = centerX + Math.cos(time * 0.5 + p.offsetX) * 30;
+        const targetY = centerY + Math.sin(time * 0.5 + p.offsetY) * 30;
+        const dx = p.x - centerX;
+        const dy = p.y - centerY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < THEME.CORE_RADIUS) {
+          const angle = Math.atan2(dy, dx);
+          const repel = THEME.REPEL_FORCE * (0.7 + Math.random() * 0.3);
+          p.vx = Math.cos(angle) * repel;
+          p.vy = Math.sin(angle) * repel;
+          p.flash = 1.0;
+        }
+
+        p.vx -= (p.x - targetX) * p.attractionScale * 0.15;
+        p.vy -= (p.y - targetY) * p.attractionScale * 0.15;
+
+        if (p.flash > 0) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(255,255,255,${p.flash * 0.3})`;
+          ctx.lineWidth = 0.7;
+          ctx.moveTo(centerX, centerY);
+          ctx.lineTo(p.x, p.y);
+          ctx.stroke();
+          p.flash *= 0.94;
+        }
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation);
+        ctx.font = `bold ${p.size}px monospace`;
+        ctx.fillStyle = THEME.ORANGE;
+        ctx.globalAlpha = p.opacity + (p.flash * 0.3);
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = THEME.ORANGE;
+        ctx.fillText('?', 0, 0);
+        ctx.restore();
+      });
+
+      requestRef.current = requestAnimationFrame(animate);
+    };
+
+    requestRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(requestRef.current);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <canvas ref={canvasRef} className="w-full h-full" style={{ filter: 'contrast(1.1) brightness(1.1)' }} />
+  );
+};
+
 export default function Home() {
   const [phase, setPhase] = useState<"idle" | "booting" | "active">("idle");
   const [statusText, setStatusText] = useState(
@@ -1090,61 +1223,10 @@ export default function Home() {
                 <span className="text-[7px] font-mono font-bold uppercase tracking-widest text-orange-400 border border-orange-400/50 px-2 py-0.5 animate-pulse">● SLOT VOLNÝ</span>
               </div>
               {/* Logo – cyberpunk ? */}
-              <div className="flex items-center justify-center h-36 mb-3">
-                <svg viewBox="0 0 120 120" className="w-36 h-36" style={{ filter: 'drop-shadow(0 0 8px rgba(249,115,22,0.45))' }}>
-                  <style>{`
-                    @keyframes vc-flip {
-                      from { transform: perspective(90px) rotateY(0deg); }
-                      to   { transform: perspective(90px) rotateY(360deg); }
-                    }
-                    @keyframes vc-pulse { 0%,100%{opacity:.85} 50%{opacity:1} }
-                    @keyframes vc-orbit {
-                      0%    { transform: translate(32px,  0px);         opacity:.55; }
-                      12.5% { transform: translate(22.6px, 22.6px);    opacity:.55; }
-                      25%   { transform: translate(0px,   32px);        opacity:.55; }
-                      37.5% { transform: translate(-22.6px, 22.6px);   opacity:.55; }
-                      50%   { transform: translate(-32px,  0px);        opacity:.55; }
-                      62.5% { transform: translate(-22.6px,-22.6px);   opacity:.55; }
-                      73%   { transform: translate(-4px,  -32px);       opacity:.55; }
-                      75%   { transform: translate(0px,   -60px);       opacity:0;   }
-                      77%   { transform: translate(4px,   -32px);       opacity:.55; }
-                      87.5% { transform: translate(22.6px,-22.6px);    opacity:.55; }
-                      100%  { transform: translate(32px,  0px);         opacity:.55; }
-                    }
-                    .vc-big { transform-origin:60px 54px; animation:vc-flip 3s linear infinite, vc-pulse 3s ease-in-out infinite; }
-                    .vc-p1  { animation:vc-orbit 5s linear infinite 0s; }
-                    .vc-p2  { animation:vc-orbit 5s linear infinite -1.25s; }
-                    .vc-p3  { animation:vc-orbit 5s linear infinite -2.5s; }
-                    .vc-p4  { animation:vc-orbit 5s linear infinite -3.75s; }
-                  `}</style>
-
-                  {/* Rohové závorky */}
-                  <path d="M14,26 L14,14 L26,14" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="square"/>
-                  <path d="M106,26 L106,14 L94,14" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="square"/>
-                  <path d="M14,94 L14,106 L26,106" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="square"/>
-                  <path d="M106,94 L106,106 L94,106" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="square"/>
-                  {/* Rohové body */}
-                  <rect x="12" y="12" width="3" height="3" fill="rgba(249,115,22,0.5)"/>
-                  <rect x="105" y="12" width="3" height="3" fill="rgba(249,115,22,0.5)"/>
-                  <rect x="12" y="105" width="3" height="3" fill="rgba(249,115,22,0.5)"/>
-                  <rect x="105" y="105" width="3" height="3" fill="rgba(249,115,22,0.5)"/>
-                  {/* Orbit ring */}
-                  <circle cx="60" cy="60" r="32" fill="none" stroke="rgba(249,115,22,0.1)" strokeWidth="0.8" strokeDasharray="2 6"/>
-
-                  {/* Velký 3D otáčející se ? */}
-                  <text x="60" y="74" textAnchor="middle" fontSize="42" fontWeight="900"
-                    fontFamily="Impact, monospace" fill="#f97316" className="vc-big">?</text>
-
-                  {/* Malé orbitující ? */}
-                  <text x="60" y="65" textAnchor="middle" fontSize="11" fontWeight="900"
-                    fontFamily="Impact, monospace" fill="rgba(249,115,22,0.65)" className="vc-p1">?</text>
-                  <text x="60" y="65" textAnchor="middle" fontSize="11" fontWeight="900"
-                    fontFamily="Impact, monospace" fill="rgba(249,115,22,0.65)" className="vc-p2">?</text>
-                  <text x="60" y="65" textAnchor="middle" fontSize="11" fontWeight="900"
-                    fontFamily="Impact, monospace" fill="rgba(249,115,22,0.65)" className="vc-p3">?</text>
-                  <text x="60" y="65" textAnchor="middle" fontSize="11" fontWeight="900"
-                    fontFamily="Impact, monospace" fill="rgba(249,115,22,0.65)" className="vc-p4">?</text>
-                </svg>
+              <div className="flex items-center justify-center h-36 mb-3 overflow-hidden">
+                <div className="w-36 h-36">
+                  <BullStackQuestionLogo />
+                </div>
               </div>
               <h3 className="text-2xl font-black italic tracking-tighter uppercase text-orange-500 mb-1">VOLNÁ<br/>KAPACITA</h3>
               <div className="h-[1px] w-full bg-gradient-to-r from-orange-500/60 to-transparent mb-4" />
