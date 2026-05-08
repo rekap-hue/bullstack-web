@@ -1178,15 +1178,15 @@ export default function Home() {
               </a>
               {/* Store badges */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center justify-center border border-orange-900/20 bg-black/50 p-3 opacity-50 cursor-not-allowed relative overflow-hidden">
+                <div className="flex items-center justify-center border border-orange-900/20 bg-black/50 px-4 py-5 h-24 opacity-50 cursor-not-allowed relative overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Download on the App Store" className="h-10 object-contain grayscale" />
-                  <span className="absolute top-1 right-2 text-[6px] font-mono uppercase tracking-widest text-orange-900/50">SOON</span>
+                  <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Download on the App Store" className="w-full h-full object-contain grayscale" />
+                  <span className="absolute top-1.5 right-2 text-[6px] font-mono uppercase tracking-widest text-orange-900/50">SOON</span>
                 </div>
-                <div className="flex items-center justify-center border border-orange-900/20 bg-black/50 p-3 opacity-50 cursor-not-allowed relative overflow-hidden">
+                <div className="flex items-center justify-center border border-orange-900/20 bg-black/50 px-4 py-5 h-24 opacity-50 cursor-not-allowed relative overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" className="h-10 object-contain grayscale" />
-                  <span className="absolute top-1 right-2 text-[6px] font-mono uppercase tracking-widest text-orange-900/50">SOON</span>
+                  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" className="w-full h-full object-contain grayscale" />
+                  <span className="absolute top-1.5 right-2 text-[6px] font-mono uppercase tracking-widest text-orange-900/50">SOON</span>
                 </div>
               </div>
             </div>
