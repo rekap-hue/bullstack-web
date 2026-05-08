@@ -340,7 +340,7 @@ const ServiceDetail = ({ title, description, icon: Icon, stats, type, onClose, o
   };
 
   const parts = title.split('_');
-  const grid = <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.13)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.13)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />;
+  const grid = <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.08)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />;
   const blackBack = (rotate: string) => (
     <div style={{ backfaceVisibility: 'hidden', transform: rotate, position: 'absolute', inset: 0, background: '#000', border: '1px solid rgba(124,45,18,0.1)' }} />
   );
@@ -996,6 +996,102 @@ export default function Home() {
           <ServiceModule title="Web_Vývoj" icon={Layout} description="Vytváříme víc než weby – stavíme digitální základny pro vaše projekty. Rychlé a bezpečné zázemí, které slouží jako mozek pro vaše aplikace a centrální uzel pro všechna vaše data." stats={[{ label: "Odezva", value: "0.02ms" }, { label: "Jádro", value: "V8_TURBO" }, { label: "Stav", value: "AKTIVNÍ" }, { label: "Verze", value: "STABLE_V14" }]} occupiedSlots={slotsByService.web} totalSlots={totalSlots} onOpen={() => setOpenService({ title: "Web_Vývoj", icon: Layout, description: "Váš projekt potřebuje víc než jen stránku – potřebuje digitální domov. Stavíme vysoce výkonná zázemí, která slouží jako mozek pro vaše mobilní aplikace. Zajišťujeme, aby vaše data byla v bezpečí, vždy dostupná a připravená k dalšímu zpracování. Od jednoduchých webů až po složité řídicí panely pro správu vašich klientů.", stats: [{ label: "Odezva", value: "0.02ms" }, { label: "Jádro", value: "V8_TURBO" }, { label: "Stav", value: "AKTIVNÍ" }, { label: "Verze", value: "STABLE_V14" }] })} />
           <ServiceModule type="ai" title="AI_Agenti" icon={Cpu} description="Přestaňte jen sbírat data, začněte je využívat. Naši AI agenti promění nepřehledné informace v jasné instrukce pro váš růst. Zatímco se soustředíte na svůj byznys, systém na pozadí analyzuje, vyhodnocuje a plánuje vaše další kroky." stats={[{ label: "Synapse", value: "512B+" }, { label: "Model", value: "AXION_4" }, { label: "Sync", value: "STABILNÍ" }, { label: "Verze", value: "STABLE_V14" }]} occupiedSlots={slotsByService.ai} totalSlots={totalSlots} onOpen={() => setOpenService({ title: "AI_Agenti", type: "ai", icon: Cpu, description: "Přestaňte jen sbírat data a začněte je využívat. Naši AI agenti dokážou analyzovat biometrické údaje, predikovat trendy a dávat vašim uživatelům rady v reálném čase. Je to jako mít v aplikaci experta, který nikdy nespí a rozumí každému číslu, které vaše zařízení naměří.", stats: [{ label: "Synapse", value: "512B+" }, { label: "Model", value: "AXION_4" }, { label: "Sync", value: "STABILNÍ" }, { label: "Verze", value: "STABLE_V14" }] })} />
           <ServiceModule type="branding" title="Branding" icon={Fingerprint} description="Technologie bez jasné identity v davu zapadne. Navrhujeme vizuální styl a uživatelská rozhraní, která jsou intuitivní, zapamatovatelná a budují okamžitou důvěru u vašich klientů." stats={[{ label: "Archetyp", value: "DEFINOVÁN" }, { label: "Kód", value: "HELIX_SYNC" }, { label: "Rezonance", value: "98.4%" }, { label: "Fáze", value: "GENESIS" }]} occupiedSlots={slotsByService.branding} totalSlots={totalSlots} onOpen={() => setOpenService({ title: "Branding", type: "branding", icon: Fingerprint, description: "Technologie bez tváře nikoho nezaujme. Pomůžeme vám definovat vizuální identitu, která bude odrážet vaši inovaci. Navrhujeme rozhraní, která jsou intuitivní a lidé je milují používat. Od loga až po uživatelský zážitek v mobilní aplikaci – tvoříme funkční design pro digitální věk.", stats: [{ label: "Archetyp", value: "DEFINOVÁN" }, { label: "Kód", value: "HELIX_SYNC" }, { label: "Rezonance", value: "98.4%" }, { label: "Fáze", value: "GENESIS" }] })} />
+        </div>
+      </section>
+
+      {/* ── SEKCE PROJEKTY ── */}
+      <section className={`relative z-20 mx-auto w-full max-w-6xl px-4 md:px-6 pb-24 transition-all duration-700 ease-out ${showHud ? 'opacity-100 translate-y-0 delay-500' : 'opacity-0 translate-y-12 pointer-events-none'}`}>
+        {/* Hlavička sekce */}
+        <div className="flex items-center gap-4 mb-10 mt-4">
+          <div className="h-[1px] w-8 bg-orange-900/40" />
+          <p className="text-[9px] font-mono font-bold uppercase tracking-[0.45em] text-orange-500/60">PROJEKTY // AKTIVNÍ_SEKVENCE</p>
+          <div className="flex-1 h-[1px] bg-orange-900/20" />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          {/* IRON CORE */}
+          <div className="group relative border border-orange-500/20 bg-black/60 p-6 flex flex-col gap-4 hover:border-orange-500/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(249,115,22,0.08)]">
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.04)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute -top-1.5 -left-1.5 w-3 h-3 border-t-2 border-l-2 border-orange-500/60 group-hover:border-orange-500 transition-colors duration-300" />
+            <div className="absolute -bottom-1.5 -right-1.5 w-3 h-3 border-b-2 border-r-2 border-orange-500/60 group-hover:border-orange-500 transition-colors duration-300" />
+            <div className="relative z-10">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-[8px] font-mono uppercase tracking-[0.35em] text-orange-900/60">PROJECT_ID // 001</p>
+                <span className="text-[7px] font-mono font-bold uppercase tracking-widest text-amber-400 border border-amber-400/40 px-2 py-0.5 animate-pulse">● ACTIVE_BETA</span>
+              </div>
+              <h3 className="text-2xl font-black italic tracking-tighter uppercase text-orange-500 mb-1">IRON CORE</h3>
+              <div className="h-[1px] w-full bg-gradient-to-r from-orange-500/40 to-transparent mb-4" />
+              <p className="text-xs font-mono text-orange-100/50 leading-relaxed mb-5">
+                <span className="text-orange-500 mr-1 font-bold">{'>>'}</span>
+                Mobilní aplikace pro biometrickou analýzu v reálném čase. Měří, vyhodnocuje a dává uživatelům srozumitelná doporučení — přímo na jejich zařízení.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {[{ l: 'Typ', v: 'BIOMETRIKA' }, { l: 'Platforma', v: 'iOS + Android' }, { l: 'Fáze', v: 'BETA' }].map((s, i) => (
+                  <div key={i} className="border-l border-orange-900/30 pl-3">
+                    <div className="text-[7px] font-mono uppercase tracking-widest text-orange-900/50 mb-0.5">{s.l}</div>
+                    <div className="text-[10px] font-bold font-mono text-orange-400/80">{s.v}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* BULLSTACK OS */}
+          <div className="group relative border border-orange-500/20 bg-black/60 p-6 flex flex-col gap-4 hover:border-orange-500/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(249,115,22,0.08)]">
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.04)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute -top-1.5 -left-1.5 w-3 h-3 border-t-2 border-l-2 border-orange-500/60 group-hover:border-orange-500 transition-colors duration-300" />
+            <div className="absolute -bottom-1.5 -right-1.5 w-3 h-3 border-b-2 border-r-2 border-orange-500/60 group-hover:border-orange-500 transition-colors duration-300" />
+            <div className="relative z-10">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-[8px] font-mono uppercase tracking-[0.35em] text-orange-900/60">PROJECT_ID // 002</p>
+                <span className="text-[7px] font-mono font-bold uppercase tracking-widest text-emerald-400 border border-emerald-400/40 px-2 py-0.5">● STABLE</span>
+              </div>
+              <h3 className="text-2xl font-black italic tracking-tighter uppercase text-orange-500 mb-1">BULLSTACK_OS</h3>
+              <div className="h-[1px] w-full bg-gradient-to-r from-orange-500/40 to-transparent mb-4" />
+              <p className="text-xs font-mono text-orange-100/50 leading-relaxed mb-5">
+                <span className="text-orange-500 mr-1 font-bold">{'>>'}</span>
+                Webová infrastruktura, která drží celý ekosystém pohromadě. Bezpečné API, správa dat a řídicí panel — zázemí, které roste spolu s vaším projektem.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {[{ l: 'Typ', v: 'INFRASTRUKTURA' }, { l: 'Stack', v: 'Next.js + AI' }, { l: 'Fáze', v: 'STABLE' }].map((s, i) => (
+                  <div key={i} className="border-l border-orange-900/30 pl-3">
+                    <div className="text-[7px] font-mono uppercase tracking-widest text-orange-900/50 mb-0.5">{s.l}</div>
+                    <div className="text-[10px] font-bold font-mono text-orange-400/80">{s.v}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* VOLNÁ KAPACITA */}
+          <div
+            className="group relative border border-orange-500/30 bg-black/60 p-6 flex flex-col gap-4 cursor-pointer hover:border-orange-500/70 transition-all duration-500 hover:shadow-[0_0_40px_rgba(249,115,22,0.14)]"
+            onClick={handleOpenBrief}
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.06),transparent_70%)] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute -top-1.5 -left-1.5 w-3 h-3 border-t-2 border-l-2 border-orange-500 shadow-[0_0_8px_#f97316] transition-all duration-300" />
+            <div className="absolute -bottom-1.5 -right-1.5 w-3 h-3 border-b-2 border-r-2 border-orange-500 shadow-[0_0_8px_#f97316] transition-all duration-300" />
+            <div className="relative z-10 flex flex-col h-full">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-[8px] font-mono uppercase tracking-[0.35em] text-orange-900/60">PROJECT_ID // 003</p>
+                <span className="text-[7px] font-mono font-bold uppercase tracking-widest text-orange-400 border border-orange-400/50 px-2 py-0.5 animate-pulse">● SLOT VOLNÝ</span>
+              </div>
+              <h3 className="text-2xl font-black italic tracking-tighter uppercase text-orange-500 mb-1">VOLNÁ<br/>KAPACITA</h3>
+              <div className="h-[1px] w-full bg-gradient-to-r from-orange-500/60 to-transparent mb-4" />
+              <p className="text-xs font-mono text-orange-100/50 leading-relaxed mb-6 flex-1">
+                <span className="text-orange-500 mr-1 font-bold">{'>>'}</span>
+                Tady by mohl být váš projekt. Máme volný slot pro nového klienta — pojďme si říct, co chcete postavit.
+              </p>
+              <button
+                onClick={handleOpenBrief}
+                className="w-full border border-orange-500/60 bg-orange-500/10 py-3 text-[10px] font-black uppercase tracking-[0.3em] text-orange-400 hover:bg-orange-500/20 hover:border-orange-400 hover:text-orange-300 transition-all duration-200 shadow-[0_0_15px_rgba(249,115,22,0.1)] hover:shadow-[0_0_25px_rgba(249,115,22,0.25)]"
+              >
+                ▶ ZAHÁJIT KONZULTACI
+              </button>
+            </div>
+          </div>
+
         </div>
       </section>
 
