@@ -1223,12 +1223,12 @@ export default function Home() {
                 <span className="text-[7px] font-mono font-bold uppercase tracking-widest text-orange-400 border border-orange-400/50 px-2 py-0.5 animate-pulse">● SLOT VOLNÝ</span>
               </div>
               {/* Logo – cyberpunk ? */}
-              <div className="flex items-center justify-center h-56 mb-3 overflow-hidden">
-                <div className="w-56 h-56">
+              <div className="flex items-center justify-center h-36 mb-3 overflow-hidden">
+                <div className="w-[450px] h-[450px] shrink-0">
                   <BullStackQuestionLogo />
                 </div>
               </div>
-              <h3 className="text-2xl font-black italic tracking-tighter uppercase text-orange-500 mb-1">VOLNÁ<br/>KAPACITA</h3>
+              <h3 className="text-2xl font-black italic tracking-tighter uppercase text-orange-500 mb-1">VOLNÁ KAPACITA</h3>
               <div className="h-[1px] w-full bg-gradient-to-r from-orange-500/60 to-transparent mb-4" />
               <p className="text-xs font-mono text-orange-100/50 leading-relaxed mb-6 flex-1">
                 <span className="text-orange-500 mr-1 font-bold">{'>>'}</span>
