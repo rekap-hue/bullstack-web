@@ -780,7 +780,7 @@ export default function Home() {
             {navItems.map((item) => (
               <button
                 key={item}
-                onClick={item === 'STATUS' ? () => setStatusOpen(true) : undefined}
+                onClick={item === 'STATUS' ? () => setStatusOpen(true) : item === 'PROJEKTY' ? () => document.getElementById('projekty')?.scrollIntoView({ behavior: 'smooth' }) : undefined}
                 className="border border-orange-500/20 bg-black/40 px-3 py-1 text-orange-200/90 transition-colors hover:border-orange-400/55 hover:text-orange-100"
               >
                 [ {item} ]
@@ -1000,7 +1000,7 @@ export default function Home() {
       </section>
 
       {/* ── SEKCE PROJEKTY ── */}
-      <section className={`relative z-20 mx-auto w-full max-w-6xl px-4 md:px-6 pb-24 transition-all duration-700 ease-out ${showHud ? 'opacity-100 translate-y-0 delay-500' : 'opacity-0 translate-y-12 pointer-events-none'}`}>
+      <section id="projekty" className={`relative z-20 mx-auto w-full max-w-6xl px-4 md:px-6 pb-24 transition-all duration-700 ease-out ${showHud ? 'opacity-100 translate-y-0 delay-500' : 'opacity-0 translate-y-12 pointer-events-none'}`}>
         {/* Hlavička sekce */}
         <div className="flex items-center gap-4 mb-10 mt-4">
           <div className="h-[1px] w-8 bg-orange-900/40" />
