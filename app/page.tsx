@@ -1089,6 +1089,63 @@ export default function Home() {
                 <p className="text-[8px] font-mono uppercase tracking-[0.35em] text-orange-900/60">PROJECT_ID // 003</p>
                 <span className="text-[7px] font-mono font-bold uppercase tracking-widest text-orange-400 border border-orange-400/50 px-2 py-0.5 animate-pulse">● SLOT VOLNÝ</span>
               </div>
+              {/* Logo – cyberpunk ? */}
+              <div className="flex items-center justify-center h-36 mb-3">
+                <svg viewBox="0 0 120 120" className="w-36 h-36" style={{ filter: 'drop-shadow(0 0 8px rgba(249,115,22,0.45))' }}>
+                  <style>{`
+                    @keyframes vc-flip {
+                      from { transform: perspective(90px) rotateY(0deg); }
+                      to   { transform: perspective(90px) rotateY(360deg); }
+                    }
+                    @keyframes vc-pulse { 0%,100%{opacity:.85} 50%{opacity:1} }
+                    @keyframes vc-orbit {
+                      0%    { transform: translate(32px,  0px);         opacity:.55; }
+                      12.5% { transform: translate(22.6px, 22.6px);    opacity:.55; }
+                      25%   { transform: translate(0px,   32px);        opacity:.55; }
+                      37.5% { transform: translate(-22.6px, 22.6px);   opacity:.55; }
+                      50%   { transform: translate(-32px,  0px);        opacity:.55; }
+                      62.5% { transform: translate(-22.6px,-22.6px);   opacity:.55; }
+                      73%   { transform: translate(-4px,  -32px);       opacity:.55; }
+                      75%   { transform: translate(0px,   -60px);       opacity:0;   }
+                      77%   { transform: translate(4px,   -32px);       opacity:.55; }
+                      87.5% { transform: translate(22.6px,-22.6px);    opacity:.55; }
+                      100%  { transform: translate(32px,  0px);         opacity:.55; }
+                    }
+                    .vc-big { transform-origin:60px 54px; animation:vc-flip 3s linear infinite, vc-pulse 3s ease-in-out infinite; }
+                    .vc-p1  { animation:vc-orbit 5s linear infinite 0s; }
+                    .vc-p2  { animation:vc-orbit 5s linear infinite -1.25s; }
+                    .vc-p3  { animation:vc-orbit 5s linear infinite -2.5s; }
+                    .vc-p4  { animation:vc-orbit 5s linear infinite -3.75s; }
+                  `}</style>
+
+                  {/* Rohové závorky */}
+                  <path d="M14,26 L14,14 L26,14" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="square"/>
+                  <path d="M106,26 L106,14 L94,14" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="square"/>
+                  <path d="M14,94 L14,106 L26,106" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="square"/>
+                  <path d="M106,94 L106,106 L94,106" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="square"/>
+                  {/* Rohové body */}
+                  <rect x="12" y="12" width="3" height="3" fill="rgba(249,115,22,0.5)"/>
+                  <rect x="105" y="12" width="3" height="3" fill="rgba(249,115,22,0.5)"/>
+                  <rect x="12" y="105" width="3" height="3" fill="rgba(249,115,22,0.5)"/>
+                  <rect x="105" y="105" width="3" height="3" fill="rgba(249,115,22,0.5)"/>
+                  {/* Orbit ring */}
+                  <circle cx="60" cy="60" r="32" fill="none" stroke="rgba(249,115,22,0.1)" strokeWidth="0.8" strokeDasharray="2 6"/>
+
+                  {/* Velký 3D otáčející se ? */}
+                  <text x="60" y="74" textAnchor="middle" fontSize="42" fontWeight="900"
+                    fontFamily="Impact, monospace" fill="#f97316" className="vc-big">?</text>
+
+                  {/* Malé orbitující ? */}
+                  <text x="60" y="65" textAnchor="middle" fontSize="11" fontWeight="900"
+                    fontFamily="Impact, monospace" fill="rgba(249,115,22,0.65)" className="vc-p1">?</text>
+                  <text x="60" y="65" textAnchor="middle" fontSize="11" fontWeight="900"
+                    fontFamily="Impact, monospace" fill="rgba(249,115,22,0.65)" className="vc-p2">?</text>
+                  <text x="60" y="65" textAnchor="middle" fontSize="11" fontWeight="900"
+                    fontFamily="Impact, monospace" fill="rgba(249,115,22,0.65)" className="vc-p3">?</text>
+                  <text x="60" y="65" textAnchor="middle" fontSize="11" fontWeight="900"
+                    fontFamily="Impact, monospace" fill="rgba(249,115,22,0.65)" className="vc-p4">?</text>
+                </svg>
+              </div>
               <h3 className="text-2xl font-black italic tracking-tighter uppercase text-orange-500 mb-1">VOLNÁ<br/>KAPACITA</h3>
               <div className="h-[1px] w-full bg-gradient-to-r from-orange-500/60 to-transparent mb-4" />
               <p className="text-xs font-mono text-orange-100/50 leading-relaxed mb-6 flex-1">
