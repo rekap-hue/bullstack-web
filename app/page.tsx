@@ -717,6 +717,7 @@ export default function Home() {
   const [briefOpen, setBriefOpen] = useState(false);
   const [briefSubmitted, setBriefSubmitted] = useState(false);
   const [statusOpen, setStatusOpen] = useState(false);
+  const [protokolOpen, setProtokolOpen] = useState(false);
   const [ironCoreOpen, setIronCoreOpen] = useState(false);
   type OpenService = { title: string; description: string; icon: React.ElementType; stats: { label: string; value: string }[]; type?: string } | null;
   const [openService, setOpenService] = useState<OpenService>(null);
@@ -914,7 +915,7 @@ export default function Home() {
             {navItems.map((item) => (
               <button
                 key={item}
-                onClick={item === 'STATUS' ? () => setStatusOpen(true) : item === 'PROJEKTY' ? () => document.getElementById('projekty')?.scrollIntoView({ behavior: 'smooth' }) : undefined}
+                onClick={item === 'STATUS' ? () => setStatusOpen(true) : item === 'PROJEKTY' ? () => document.getElementById('projekty')?.scrollIntoView({ behavior: 'smooth' }) : item === 'O_PROTOKOLU' ? () => setProtokolOpen(true) : undefined}
                 className="border border-orange-500/20 bg-black/40 px-3 py-1 text-orange-200/90 transition-colors hover:border-orange-400/55 hover:text-orange-100"
               >
                 [ {item} ]
@@ -1394,6 +1395,107 @@ export default function Home() {
       {openService && (
         <ServiceDetail title={openService.title} description={openService.description} icon={openService.icon} stats={openService.stats} type={openService.type} onClose={() => setOpenService(null)} onOpenBrief={handleOpenBrief} />
       )}
+
+      {/* O_PROTOKOLU overlay */}
+      <div className={`fixed inset-0 z-[60] transition-all duration-300 ${protokolOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}>
+        <div className="absolute inset-0 bg-black/85 backdrop-blur-[3px]" onClick={() => setProtokolOpen(false)} />
+        <div className={`absolute inset-3 md:inset-8 border border-orange-500/35 bg-[#040404]/98 shadow-[0_0_60px_rgba(249,115,22,0.12)] transition-all duration-300 overflow-y-auto ${protokolOpen ? 'scale-100' : 'scale-[0.97]'}`}>
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.05)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+          <div className="absolute inset-[10px] border border-orange-500/15 pointer-events-none" />
+          {/* Dekorativní souřadnice */}
+          <span className="absolute top-3 left-4 text-[8px] font-mono text-orange-900/40 select-none">X:0xF9_73_16 // Y:0x04_04_04</span>
+          <span className="absolute top-3 right-20 text-[8px] font-mono text-orange-900/40 select-none">BUILD_2026.Q2.β</span>
+          <span className="absolute bottom-3 left-4 text-[8px] font-mono text-orange-900/40 select-none">PROTOC_REV:1.0.4 // UPTIME:∞</span>
+
+          <div className="relative z-10 p-6 md:p-10 flex flex-col gap-10">
+
+            {/* Header */}
+            <div className="flex items-start justify-between gap-4 border-b border-orange-500/20 pb-6">
+              <div>
+                <p className="text-[9px] font-mono font-bold uppercase tracking-[0.45em] text-orange-500/60 mb-2">BULLSTACK // PROTOCOL_INIT</p>
+                <h2 className="text-3xl md:text-5xl font-black italic tracking-tighter uppercase text-orange-500 leading-none">[ O_PROTOKOLU ]</h2>
+              </div>
+              <button onClick={() => setProtokolOpen(false)} className="shrink-0 border border-orange-500/30 px-3 md:px-4 py-2 text-[10px] font-bold uppercase tracking-[0.25em] md:tracking-[0.35em] text-orange-200 hover:border-orange-400/60 hover:bg-orange-500/10 transition-colors">
+                ✕ ZAVŘÍT
+              </button>
+            </div>
+
+            {/* 1. MANIFEST */}
+            <div>
+              <p className="text-[8px] font-mono font-bold uppercase tracking-[0.45em] text-orange-500/50 mb-4">[ PROTOC_INIT ] // ÚVODNÍ_MANIFEST</p>
+              <div className="border-l-2 border-orange-500/40 pl-6">
+                <h3 className="text-sm md:text-base font-black uppercase tracking-[0.15em] text-orange-400 mb-4">BULLSTACK: SYNTHETIC STRENGTH &amp; DIGITAL PRECISION</h3>
+                <p className="text-sm font-mono text-orange-100/65 leading-relaxed">
+                  <span className="text-orange-500 font-bold mr-2">{'>>'}</span>
+                  V digitálním věku je kód novou ocelí. BullStack není jen vývojářské studio, je to kovárna digitálních nástrojů pro novou éru. Naším posláním je spojit syrovou sílu funkčního designu s nekompromisní logikou moderních technologií. Nestavíme weby. Stavíme digitální pevnosti, které pracují pro vás.
+                </p>
+              </div>
+            </div>
+
+            {/* 2. METODIKA */}
+            <div>
+              <p className="text-[8px] font-mono font-bold uppercase tracking-[0.45em] text-orange-500/50 mb-4">[ OPERATIONAL_PHASES ] // METODIKA_VÝVOJE</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+                {[
+                  {
+                    phase: 'PHASE_01',
+                    code: 'CORE_DECONSTRUCTION',
+                    text: 'Každý projekt začíná hloubkovou analýzou jádra. Rozložíme váš nápad na základní bity, identifikujeme slabá místa a definujeme technologický stack, který přežije i příští dekádu. Žádný balast, jen čistá efektivita.'
+                  },
+                  {
+                    phase: 'PHASE_02',
+                    code: 'SYSTEM_ARCHITECT',
+                    text: 'Stavíme na základech Next.js, AI integrací a real-time procesování dat. Naše rozhraní nejsou jen hezká na pohled – jsou navržena pro maximální průchodnost informací a intuitivní ovládání v extrémních podmínkách.'
+                  },
+                  {
+                    phase: 'PHASE_03',
+                    code: 'NEURAL_DEPLOYMENT',
+                    text: 'Odevzdáním kódu to nekončí. Nasazujeme systémy jako PWA (Progressive Web Apps), které běží nezávisle na korporátních obchodech. Vaše aplikace bude žít přímo ve vašem zařízení, připravena k okamžitému nasazení.'
+                  }
+                ].map((p, i) => (
+                  <div key={i} className={`group p-6 border border-orange-900/25 hover:border-orange-500/40 hover:bg-orange-500/[0.03] transition-all duration-300 ${i > 0 ? 'md:border-l-0' : ''}`}>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-[8px] font-mono font-bold text-orange-500/60 uppercase tracking-widest">{p.phase}</span>
+                    </div>
+                    <h4 className="text-xs font-black uppercase tracking-[0.2em] text-orange-400 mb-3 group-hover:text-orange-300 transition-colors">{'//'} {p.code}</h4>
+                    <div className="h-[1px] w-8 bg-orange-500/30 mb-3" />
+                    <p className="text-xs font-mono text-orange-100/50 leading-relaxed group-hover:text-orange-100/70 transition-colors">{p.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 3. PRIVACY & SECURITY */}
+            <div className="opacity-80">
+              <p className="text-[8px] font-mono font-bold uppercase tracking-[0.45em] text-orange-500/50 mb-4">[ DATA_ENCRYPTION ] // PRIVACY &amp; SECURITY_PROTOCOL</p>
+              <div className="border border-orange-900/30 bg-orange-950/10 p-5 md:p-6">
+                <p className="text-[9px] font-black uppercase tracking-[0.35em] text-orange-500/70 mb-5">[ PRIVACY_POLICY_v1.0.4 ]</p>
+                <div className="flex flex-col gap-3">
+                  {[
+                    { id: '01_ANONYMITY', text: 'Protokol BullStack neshromažďuje vaše biometrické údaje ani identitu na externích serverech. Soukromí není volba, je to základní nastavení systému.' },
+                    { id: '02_LOCAL_VAULT', text: 'Veškerá data aplikace Iron Core jsou šifrována a ukládána výhradně do lokálního úložiště vašeho zařízení. Bez vašeho klíče (exportu) jsou data pro zbytek světa nečitelná a v případě smazání cache nenávratně zničena.' },
+                    { id: '03_AI_PROCESSING', text: 'AI analýza probíhá přes zabezpečené šifrované tunely. Data nejsou využívána k trénování cizích modelů a po skončení relace jsou z paměti procesního jádra okamžitě vymazána.' },
+                    { id: '04_ZERO_LEAK_POLICY', text: 'Sdílení dat třetím stranám je v rozporu s naším kódem. Výjimku tvoří pouze platební brány (Stripe) při aktivaci PRO režimu, podléhající armádnímu stupni zabezpečení.' },
+                  ].map((item) => (
+                    <div key={item.id} className="group flex gap-4 py-2.5 border-b border-orange-900/20 last:border-0 hover:border-orange-500/20 transition-colors">
+                      <span className="text-[8px] font-mono font-bold text-orange-500/60 uppercase tracking-widest shrink-0 mt-0.5 group-hover:text-orange-500/90 transition-colors">{item.id}</span>
+                      <p className="text-xs font-mono text-orange-100/45 leading-relaxed group-hover:text-orange-100/70 transition-colors">{item.text}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-5 pt-4 border-t border-orange-900/30 flex flex-wrap items-center justify-between gap-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-[8px] font-mono font-bold uppercase tracking-widest text-emerald-400/80">STATUS: SYSTEM_SECURED // NO_LEAKS_DETECTED</span>
+                  </div>
+                  <span className="text-[8px] font-mono text-orange-900/50">BULLSTACK_PROTOC_REVISION: 2026_Q2</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
 
       {/* STATUS overlay */}
       <div className={`fixed inset-0 z-[60] transition-all duration-300 ${statusOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}>
