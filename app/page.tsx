@@ -1311,10 +1311,68 @@ export default function Home() {
 
             {/* CTA tlačítka */}
             <div className="flex flex-col gap-4">
-              {/* Hlavní web CTA */}
-              <a href="#" className="flex items-center justify-center gap-3 border border-orange-500/70 bg-orange-500/15 px-6 py-4 text-xs md:text-sm font-black uppercase tracking-[0.25em] text-orange-400 hover:bg-orange-500/25 hover:border-orange-400 hover:text-orange-300 transition-all duration-200 shadow-[0_0_20px_rgba(249,115,22,0.15)] hover:shadow-[0_0_40px_rgba(249,115,22,0.35)]">
-                🌐 OTEVŘÍT WEBOVOU VERZI &gt;
-              </a>
+              {/* Hlavní web CTA – zatím disabled */}
+              <div className="relative flex items-center justify-center gap-3 border border-orange-500/30 bg-orange-500/5 px-6 py-4 opacity-60 cursor-not-allowed">
+                <span className="text-xs md:text-sm font-black uppercase tracking-[0.25em] text-orange-500">🌐 WEBOVÁ VERZE</span>
+                <span className="absolute top-1.5 right-3 text-[7px] font-mono font-bold uppercase tracking-widest text-orange-500/60 border border-orange-500/30 px-1.5 py-0.5">V PŘÍPRAVĚ</span>
+              </div>
+
+              {/* PWA instalační návod */}
+              <div className="border border-orange-500/20 bg-black/40 p-5">
+                <p className="text-[8px] font-mono uppercase tracking-[0.35em] text-orange-500/60 mb-4">INSTALACE // PWA_PROTOKOL</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* iOS */}
+                  <div className="border border-orange-900/30 p-3">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-base">🍎</span>
+                      <span className="text-[9px] font-black uppercase tracking-[0.25em] text-orange-400">iOS / Safari</span>
+                    </div>
+                    <ol className="flex flex-col gap-1.5">
+                      {['Otevři odkaz v Safari', 'Klepni na ikonu Sdílet ⎙', 'Vyber „Přidat na plochu"', 'Potvrď → hotovo'].map((s, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="text-[8px] font-mono font-bold text-orange-500 mt-0.5 shrink-0">{String(i+1).padStart(2,'0')}</span>
+                          <span className="text-[9px] font-mono text-orange-100/50 leading-relaxed">{s}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                  {/* Android */}
+                  <div className="border border-orange-900/30 p-3">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-base">🤖</span>
+                      <span className="text-[9px] font-black uppercase tracking-[0.25em] text-orange-400">Android / Chrome</span>
+                    </div>
+                    <ol className="flex flex-col gap-1.5">
+                      {['Otevři odkaz v Chrome', 'Klepni na ⋮ menu', 'Vyber „Přidat na plochu"', 'Potvrď → aplikace nainstalována'].map((s, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="text-[8px] font-mono font-bold text-orange-500 mt-0.5 shrink-0">{String(i+1).padStart(2,'0')}</span>
+                          <span className="text-[9px] font-mono text-orange-100/50 leading-relaxed">{s}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                  {/* Desktop */}
+                  <div className="border border-orange-900/30 p-3">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-base">🖥</span>
+                      <span className="text-[9px] font-black uppercase tracking-[0.25em] text-orange-400">Desktop / Chrome</span>
+                    </div>
+                    <ol className="flex flex-col gap-1.5">
+                      {['Otevři odkaz v Chrome', 'Klikni na ikonu ⊕ v adresním řádku', 'Klikni „Nainstalovat"', 'App se otevře jako okno'].map((s, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="text-[8px] font-mono font-bold text-orange-500 mt-0.5 shrink-0">{String(i+1).padStart(2,'0')}</span>
+                          <span className="text-[9px] font-mono text-orange-100/50 leading-relaxed">{s}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                </div>
+                <div className="mt-4 pt-3 border-t border-orange-900/20 flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                  <p className="text-[8px] font-mono text-orange-900/60">Aktualizace probíhají automaticky při každém spuštění — bez App Store.</p>
+                </div>
+              </div>
+
               {/* Store badges */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex items-center justify-center border border-orange-900/20 bg-black/50 px-4 py-5 h-24 opacity-50 cursor-not-allowed relative overflow-hidden">
