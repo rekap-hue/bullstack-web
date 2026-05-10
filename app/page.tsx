@@ -1527,6 +1527,14 @@ export default function Home() {
                       <p className="text-[8px] font-bold tracking-widest text-orange-600/50 mb-1">05_REKLAMACE // TERMINAL_SUPPORT</p>
                       <p>V případě technické chyby v distribuci PRO verze kontaktujte COMMS_UPLINK na info@bullstack.cz. Reklamace jsou vyřizovány v zákonné lhůtě 30 dnů.</p>
                     </div>
+                    <div>
+                      <p className="text-[8px] font-bold tracking-widest text-orange-600/50 mb-1">06_ROZHODNÉ_PRÁVO // ADR</p>
+                      <p>Tyto podmínky se řídí právem České republiky. Případné spory bude řešit příslušný soud ČR. Mimosoudní řešení sporů spotřebitelů zajišťuje Česká obchodní inspekce — <span className="text-orange-500/50">www.coi.cz</span>. EU platforma pro řešení sporů online: <span className="text-orange-500/50">ec.europa.eu/consumers/odr</span>.</p>
+                    </div>
+                    <div>
+                      <p className="text-[8px] font-bold tracking-widest text-orange-600/50 mb-1">07_ZPRACOVÁNÍ_DAT // GDPR</p>
+                      <p>Správce osobních údajů: [NÁZEV / IČO]. Osobní údaje (e-mail, platební metadata) zpracováváme výhradně za účelem poskytnutí služby, správy předplatného a plnění zákonných povinností. Data nejsou předávána třetím stranám mimo Stripe (zpracovatel plateb) a poskytovatele AI (anonymizované requesty). Subjekt údajů má právo na přístup, opravu, výmaz, přenositelnost a omezení zpracování — žádosti zasílejte na info@bullstack.cz. Dozorový orgán: Úřad pro ochranu osobních údajů, <span className="text-orange-500/50">www.uoou.cz</span>.</p>
+                    </div>
                     <p className="text-[7px] text-orange-900/40 pt-2 border-t border-orange-900/20">OPERATIONAL_TERMS_v1.0 // PLATNÉ OD 2026_Q2 // BULLSTACK</p>
                   </div>
                 )}
