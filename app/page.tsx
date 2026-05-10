@@ -718,6 +718,7 @@ export default function Home() {
   const [briefSubmitted, setBriefSubmitted] = useState(false);
   const [statusOpen, setStatusOpen] = useState(false);
   const [protokolOpen, setProtokolOpen] = useState(false);
+  const [termsOpen, setTermsOpen] = useState(false);
   const [ironCoreOpen, setIronCoreOpen] = useState(false);
   type OpenService = { title: string; description: string; icon: React.ElementType; stats: { label: string; value: string }[]; type?: string } | null;
   const [openService, setOpenService] = useState<OpenService>(null);
@@ -1490,6 +1491,45 @@ export default function Home() {
                   </div>
                   <span className="text-[8px] font-mono text-orange-900/50">BULLSTACK_PROTOC_REVISION: 2026_Q2</span>
                 </div>
+              </div>
+
+              {/* OBCHODNÍ PODMÍNKY accordion */}
+              <div className="mt-6 border-t border-orange-900/20 pt-4">
+                <button
+                  onClick={() => setTermsOpen(v => !v)}
+                  className="flex items-center gap-2 text-[9px] font-mono uppercase tracking-[0.3em] text-orange-700/60 hover:text-orange-500/80 transition-colors"
+                >
+                  <span className="text-orange-900/50">{termsOpen ? '▾' : '▸'}</span>
+                  [ VIEW_FULL_TERMS ] // OPERATIONAL_TERMS_v1.0
+                </button>
+
+                {termsOpen && (
+                  <div className="mt-4 space-y-4 text-[9px] font-mono text-orange-100/35 leading-relaxed">
+                    <div>
+                      <p className="text-[8px] font-bold tracking-widest text-orange-600/50 mb-1">01_POSKYTOVATEL // IDENTITA</p>
+                      <p>Provozovatelem digitálního ekosystému BullStack a aplikace Iron Core je:</p>
+                      <p className="mt-1">BullStack s.r.o. &nbsp;·&nbsp; IČO: [DOPLŇ] &nbsp;·&nbsp; Sídlo: [DOPLŇ]</p>
+                      <p>Kontakt: info@bullstack.cz</p>
+                    </div>
+                    <div>
+                      <p className="text-[8px] font-bold tracking-widest text-orange-600/50 mb-1">02_DIGITÁLNÍ_SLUŽBY</p>
+                      <p>Iron Core je poskytován jako digitální obsah (SaaS). Aktivací PRO verze získává uživatel přístup k AI modulům a pokročilé analytice. Vzhledem k povaze digitálního plnění (okamžitý přístup k funkcím) uživatel výslovně souhlasí s tím, že započetím plnění zaniká právo na odstoupení od smlouvy bez udání důvodu v 14denní lhůtě.</p>
+                    </div>
+                    <div>
+                      <p className="text-[8px] font-bold tracking-widest text-orange-600/50 mb-1">03_PLATEBNÍ_BRÁNA</p>
+                      <p>Transakce jsou zprostředkovány protokolem Stripe. Předplatné je automaticky obnovováno v měsíčních intervalech. Deaktivaci lze provést kdykoliv v nastavení terminálu (aplikace), nejpozději 24 hodin před koncem aktuálního cyklu.</p>
+                    </div>
+                    <div>
+                      <p className="text-[8px] font-bold tracking-widest text-orange-600/50 mb-1">04_ODPOVĚDNOST_ZA_DATA</p>
+                      <p>Uživatel bere na vědomí, že Iron Core operuje primárně na bázi lokálního úložiště. Poskytovatel neručí za ztrátu dat způsobenou smazáním mezipaměti prohlížeče uživatelem nebo hardwarovou závadou na straně klienta.</p>
+                    </div>
+                    <div>
+                      <p className="text-[8px] font-bold tracking-widest text-orange-600/50 mb-1">05_REKLAMACE // TERMINAL_SUPPORT</p>
+                      <p>V případě technické chyby v distribuci PRO verze kontaktujte COMMS_UPLINK na info@bullstack.cz. Reklamace jsou vyřizovány v zákonné lhůtě 30 dnů.</p>
+                    </div>
+                    <p className="text-[7px] text-orange-900/40 pt-2 border-t border-orange-900/20">OPERATIONAL_TERMS_v1.0 // PLATNÉ OD 2026_Q2 // BULLSTACK</p>
+                  </div>
+                )}
               </div>
             </div>
 
